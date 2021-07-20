@@ -1,12 +1,13 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Quản lý sản phẩm";
 }
+
+<h2>Quản lý sản phẩm</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<h2>Quản lý sản phẩm</h2>
 <div id="product"></div>
 
 @section scripts
@@ -22,5 +23,18 @@
                 alert(xhr.responseText);
             }
         });
+        function Paging(page) {
+            $.ajax({
+                url: "/Product/PartialProduct",
+                type: "GET",
+                data: { page: page },
+                success: function (data) {
+                    $("#product").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
     </script>
 }

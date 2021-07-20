@@ -195,6 +195,7 @@
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceDetail.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Paging.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\Province.cs" />
