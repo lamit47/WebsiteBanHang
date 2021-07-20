@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<h2>Quản lý sản phẩm</h2>
+<div id="product"></div>
+
+@section scripts
+{
+    <script>
+        $.ajax({
+            url: "/Product/PartialProduct",
+            type: "GET",
+            success: function (data) {
+                $("#product").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    </script>
+}

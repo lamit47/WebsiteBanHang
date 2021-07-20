@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace GearBatOn.Models
 {
-    public partial class GearBatOn : DbContext
+    public partial class GearBatOnContext : DbContext
     {
-        public GearBatOn()
-            : base("name=GearBatOn")
+        public GearBatOnContext()
+            : base("name=GearBatOnContext")
         {
         }
 

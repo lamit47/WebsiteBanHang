@@ -90,7 +90,7 @@ CREATE TABLE Invoice
 	CountryId INT NOT NULL,
 	ProvinceId INT NOT NULL,
 	Address NVARCHAR(255) NOT NULL,
-	PaymentStatus BIT NOT NULL DEFAULT 0, -- 1 đã thanh toán ; 0 chưa thanh toán	
+	PaymentStatus BIT NOT NULL DEFAULT 0,
 	
 	FOREIGN KEY (PromotionId) REFERENCES Promotion(Id),
 	FOREIGN KEY (StaffId) REFERENCES AspNetUsers(Id),
