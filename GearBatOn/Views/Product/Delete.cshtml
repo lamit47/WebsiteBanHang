@@ -1,0 +1,53 @@
+﻿@model GearBatOn.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CategoryId)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.CategoryId)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CountryId)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.CountryId)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BrandId)</dt>
+        <dd class="col-sm-9">@@Html.DisplayFor(model => model.BrandId)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.WarrantyPeriod)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.WarrantyPeriod)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.InventoryAmount)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.InventoryAmount)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ImagePath)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.ImagePath)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Status)</dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+</div>
+    }
+</div>
