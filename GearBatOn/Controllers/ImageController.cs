@@ -12,6 +12,12 @@ namespace GearBatOn.Controllers
     {
         GearBatOnContext _dbContext = new GearBatOnContext();
         // GET: Image
+        public ActionResult Index(int id)
+        {
+            List<Image> images = _dbContext.Images.Where(x => x.ProductId == id).ToList();
+            return View(images);
+        }
+
         public ActionResult Add(int id)
         {
             Image image = new Image();
@@ -29,7 +35,21 @@ namespace GearBatOn.Controllers
             _dbContext.Images.Add(imageModel);
             _dbContext.SaveChanges();
             ModelState.Clear();
-            return RedirectToAction("Add", new { id = imageModel.Id });
+            return RedirectToAction("Add", new { id = imageModel.ProductId });
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Image image = _dbContext.Images.FirstOrDefault(x => x.Id == id);
+            var temp = image.ProductId;
+            string fullPath = Request.MapPath(image.ImagePath);
+            if (System.IO.File.Exists(fullPath))
+            {
+                System.IO.File.Delete(fullPath);
+            }
+            _dbContext.Images.Remove(image);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index", new { id = temp });
         }
     }
 }

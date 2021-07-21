@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GearBatOn.Models.Image>
+
+@{
+    ViewBag.Title = "Quản lý hình ảnh";
+    var temp = Request.Url.Segments[3];
+}
+
+<h2>Quản lý hình ảnh</h2>
+
+<p>
+    @Html.ActionLink("Thêm mới", "Add", new { id = temp }, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+</p>
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">Mã</th>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Xóa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+                <td><img src="@Url.Content(item.ImagePath)" height="150" width="150" /></td>
+                <td>
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id }, new { onclick = "return confirm('Bạn có muốn xóa không?');" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

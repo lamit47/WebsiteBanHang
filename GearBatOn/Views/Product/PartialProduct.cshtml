@@ -11,6 +11,7 @@
             <th scope="col">Giá</th>
             <th scope="col">Thời gian bảo hành</th>
             <th scope="col">Tồn kho</th>
+            <th scope="col">Hình ảnh</th>
             <th scope="col">Sửa/Chi tiết/Xóa</th>
         </tr>
     </thead>
@@ -26,6 +27,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
                 <td>@Html.DisplayFor(modelItem => item.WarrantyPeriod)/Tháng</td>
                 <td>@Html.DisplayFor(modelItem => item.InventoryAmount)</td>
+                <td><img src="@Url.Content(item.FeatureImage ?? "~/Images/empty-image.png")" height="150" width="150"/></td>
                 <td>
                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |

@@ -12,6 +12,8 @@ namespace GearBatOn.Models
         public List<Category> ListCategory = new List<Category>();
         public List<Country> ListCountry = new List<Country>();
         public List<Brand> ListBrand = new List<Brand>();
+        public List<Image> ListImage = new List<Image>();
+        public string FeatureImage;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()

@@ -25,6 +25,14 @@ namespace GearBatOn.Controllers
             int take = 10;
             int total = _dbContext.Products.Where(x => x.Status == true).Count();
             List<Product> products = _dbContext.Products.Where(x => x.Status == true).OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+            foreach (var item in products)
+            {
+                var temp = _dbContext.Images.FirstOrDefault(x => x.ProductId == item.Id);
+                if (temp != null)
+                {
+                    item.FeatureImage = temp.ImagePath;
+                }
+            }
             ViewBag.Paging = pg.Pagination(total, (int)page, take);
 
             return PartialView("PartialProduct", products);
@@ -78,6 +86,7 @@ namespace GearBatOn.Controllers
         public ActionResult Details(int id)
         {
             Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
+            product.ListImage = _dbContext.Images.Where(x => x.ProductId == id).ToList();
             return View(product);
         }
 

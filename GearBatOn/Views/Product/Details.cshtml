@@ -34,6 +34,14 @@
         <dt class="col-sm-3">Tồn kho</dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.InventoryAmount)</dd>
 
+        <dt class="col-sm-3">Hình ảnh</dt>
+        <dd class="col-sm-9">
+            @foreach (var item in Model.ListImage)
+            {
+                <img src="@Url.Content(item.ImagePath)" height="150" width="150"/>
+            }
+        </dd>
+
         <dt class="col-sm-3">Mô tả sản phẩm</dt>
         <dd class="col-sm-9">
             @Html.TextAreaFor(model => model.Description, 20, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
@@ -41,6 +49,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", type = "button" }) 
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
     @Html.ActionLink("Quay trở lại danh sách", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
 </p>
