@@ -8,6 +8,7 @@ namespace GearBatOn.Models
 
     public partial class InvoiceDetail
     {
+        public decimal TotalPrice;
         public int Id { get; set; }
 
         public int InvoiceId { get; set; }

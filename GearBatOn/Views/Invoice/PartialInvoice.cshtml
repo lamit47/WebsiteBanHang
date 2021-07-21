@@ -5,79 +5,42 @@
 <table class="table table-bordered border-primary">
     <thead>
         <tr>
-            <th scope="col">
-                Nước
-                @*@Html.DisplayNameFor(model => model.Country.Name)*@
-            </th>
-            <th scope="col">
-                Mã khuyến mãi
-                @*@Html.DisplayNameFor(model => model.Promotion.Name)*@
-            </th>
-            <th scope="col">
-                Tỉnh/Thành phố
-                @*@Html.DisplayNameFor(model => model.Province.Name)*@
-            </th>
-            <th scope="col">
-                Tên Nhân Viên
-                @*@Html.DisplayNameFor(model => model.StaffId)*@
-            </th>
-            <th scope="col">
-                Tên khách hàng
-                @*@Html.DisplayNameFor(model => model.CustomerId)*@
-            </th>
-            <th scope="col">
-                Ngày và giờ đặt hàng
-                @*@Html.DisplayNameFor(model => model.Date)*@
-            </th>
-            <th scope="col">
-                Địa chỉ
-                @*@Html.DisplayNameFor(model => model.Address)*@
-            </th>
-            <th scope="col">
-                Trang thái đơn hàng
-                @*@Html.DisplayNameFor(model => model.PaymentStatus)*@
-            </th>
-            <th scope="col">
-                Chi tiết
-            </th>
+            <th scope="col">Mã</th>
+            <th scope="col">Mã khuyến mãi</th>
+            <th scope="col">Nước</th>
+            <th scope="col">Tỉnh/Thành phố</th>
+            <th scope="col">Tên Nhân Viên</th>
+            <th scope="col">Tên khách hàng</th>
+            <th scope="col">Ngày và giờ đặt hàng</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Trang thái đơn hàng</th>
+            <th scope="col">Chi tiết</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Promotion.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Province.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameStaff)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameCustomer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>@Html.DisplayFor(modelItem => item.Promotion.Name)</td>
+                <td> @Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Province.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.NameStaff)</td>
+                <td>@Html.DisplayFor(modelItem => item.NameCustomer)</td>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
                 <td>
                     <a href="#" class="btn-active" data-id="@item.Id">@(item.PaymentStatus ? "Duyệt":"Đã duyệt")</a>
                     @*@Html.DisplayFor(modelItem => item.PaymentStatus)*@
                 </td>
-                <td>
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
-                </td>
+                <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id })</td>
             </tr>
         }
     </tbody>
 </table>
+
+@Html.Raw(ViewBag.Paging)
+
 @section scripts
 {
     <script>
@@ -111,7 +74,6 @@
         }
         invoice.init();
     </script>
-     
+
 }
 
-@Html.Raw(ViewBag.Paging)

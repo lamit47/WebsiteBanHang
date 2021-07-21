@@ -9,6 +9,8 @@ namespace GearBatOn.Models
     [Table("Invoice")]
     public partial class Invoice
     {
+        public string NameStaff;
+        public string NameCustomer;
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Invoice()
         {
