@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý nhà sản xuất</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+<div id="brand"></div>
+
+@section scripts
+{
+    <script>
+        $.ajax({
+            url: "/Brand/PartialBrand",
+            type: "GET",
+            success: function (data) {
+                $("#brand").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        function Paging(page) {
+            $.ajax({
+                url: "/Brand/PartialBrand",
+                type: "GET",
+                data: { page: page },
+                success: function (data) {
+                    $("#brand").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
+}

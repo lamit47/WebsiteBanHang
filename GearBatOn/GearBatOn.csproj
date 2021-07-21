@@ -181,6 +181,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BrandController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -307,18 +308,22 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Promotion\Create.cshtml" />
-    <Content Include="Views\Promotion\Edit.cshtml" />
-    <Content Include="Views\Promotion\Delete.cshtml" />
-    <Content Include="Views\Promotion\Index.cshtml" />
-    <Content Include="Views\Promotion\Details.cshtml" />
-    <Content Include="Views\Promotion\PartialPromo.cshtml" />
+    <Content Include="Views\Category\CategoryList.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\PartialCategory.cshtml" />
+    <Content Include="Views\Brand\Create.cshtml" />
+    <Content Include="Views\Brand\Delete.cshtml" />
+    <Content Include="Views\Brand\Details.cshtml" />
+    <Content Include="Views\Brand\Edit.cshtml" />
     <Content Include="Views\Brand\Index.cshtml" />
     <Content Include="Views\Brand\PartialBrand.cshtml" />
-    <Content Include="Views\Brand\Create.cshtml" />
-    <Content Include="Views\Brand\Edit.cshtml" />
-    <Content Include="Views\Brand\Details.cshtml" />
-    <Content Include="Views\Brand\Delete.cshtml" />
+    <Content Include="Views\Promotion\Create.cshtml" />
+    <Content Include="Views\Promotion\Delete.cshtml" />
+    <Content Include="Views\Promotion\Details.cshtml" />
+    <Content Include="Views\Promotion\Edit.cshtml" />
+    <Content Include="Views\Promotion\Index.cshtml" />
+    <Content Include="Views\Promotion\PartialPromo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

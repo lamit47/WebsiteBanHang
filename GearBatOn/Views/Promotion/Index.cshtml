@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Quản lý khuyến mãi</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới", "Create")
+</p>
+
+<div id="promotion"></div>
+
+@section scripts
+{
+    <script>
+        $.ajax({
+            url: "/Promotion/PartialPromo",
+            type: "GET",
+            success: function (data) {
+                $("#promotion").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        function Paging(page) {
+            $.ajax({
+                url: "/Promotion/PartialPromo",
+                type: "GET",
+                data: { page: page },
+                success: function (data) {
+                    $("#promotion").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
+}
