@@ -1,0 +1,117 @@
+﻿@model IEnumerable<GearBatOn.Models.Invoice>
+
+
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">
+                Nước
+                @*@Html.DisplayNameFor(model => model.Country.Name)*@
+            </th>
+            <th scope="col">
+                Mã khuyến mãi
+                @*@Html.DisplayNameFor(model => model.Promotion.Name)*@
+            </th>
+            <th scope="col">
+                Tỉnh/Thành phố
+                @*@Html.DisplayNameFor(model => model.Province.Name)*@
+            </th>
+            <th scope="col">
+                Tên Nhân Viên
+                @*@Html.DisplayNameFor(model => model.StaffId)*@
+            </th>
+            <th scope="col">
+                Tên khách hàng
+                @*@Html.DisplayNameFor(model => model.CustomerId)*@
+            </th>
+            <th scope="col">
+                Ngày và giờ đặt hàng
+                @*@Html.DisplayNameFor(model => model.Date)*@
+            </th>
+            <th scope="col">
+                Địa chỉ
+                @*@Html.DisplayNameFor(model => model.Address)*@
+            </th>
+            <th scope="col">
+                Trang thái đơn hàng
+                @*@Html.DisplayNameFor(model => model.PaymentStatus)*@
+            </th>
+            <th scope="col">
+                Chi tiết
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Promotion.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Province.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameStaff)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCustomer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    <a href="#" class="btn-active" data-id="@item.Id">@(item.PaymentStatus ? "Duyệt":"Đã duyệt")</a>
+                    @*@Html.DisplayFor(modelItem => item.PaymentStatus)*@
+                </td>
+                <td>
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts
+{
+    <script>
+        var invoice = {
+            init: function () {
+                invoice.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = btn.data('id');
+                    $.ajax({
+                        url: "/Admin/Invoice/ChangeStatus",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            console.log(response);
+                            if (response.PaymentStatus == true) {
+                                btn.text("Duyệt");
+
+                            }
+                            else {
+                                btn.text("Chưa duyệt");
+                            }
+                        }
+                    });
+                });
+            }
+        }
+        invoice.init();
+    </script>
+     
+}
+
+@Html.Raw(ViewBag.Paging)

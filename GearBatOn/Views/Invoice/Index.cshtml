@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>Quản lý đơn đặt hàng</h2>
+<div id="invoice"></div>
+
+@section scripts
+{
+    <script>
+        $.ajax({
+            url: "/Invoice/PartialInvoice",
+            type: "GET",
+            success: function (data) {
+                $("#invoice").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        function Paging(page) {
+            $.ajax({
+                url: "/Invoice/PartialInvoice",
+                type: "GET",
+                data: { page: page },
+                success: function (data) {
+                    $("#invoice").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
+ 
+}
+
