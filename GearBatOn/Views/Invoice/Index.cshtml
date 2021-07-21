@@ -20,6 +20,25 @@
                 alert(xhr.responseText);
             }
         });
+
+        $(document).on('click', '#btn-accept', function () {
+            var btn = $(this);
+            var id = btn.data('id');
+            $.ajax({
+                url: "/Invoice/ChangeStatus",
+                data: { id: id },
+                dataType: "json",
+                type: "POST",
+                success: function (response) {
+                    if (response.status == true) {
+                        btn.text("Đã chấp nhận");
+                    } else {
+                        btn.text("Chưa chấp nhận");
+                    }
+                }
+            });
+        });
+
         function Paging(page) {
             $.ajax({
                 url: "/Invoice/PartialInvoice",

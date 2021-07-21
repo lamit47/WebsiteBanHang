@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+    decimal t = 0;
 }
 
 <h2>Chi tiết đơn đặt hàng</h2>
@@ -11,38 +13,40 @@
 <table class="table table-bordered border-primary">
     <thead>
         <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Tổng tiền</th>
 
-            <th>
-                Tên sản phẩm
-                @*@Html.DisplayNameFor(model => model.Product.Name)*@
-            </th>
-            <th>
-                Số lượng
-                @*@Html.DisplayNameFor(model => model.Amount)*@
-            </th>
-            <th>
-                Tổng tiền
-            </th>
-           
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-
+        @foreach (var item in Model)
+        {
+            var sum = item.Product.Price * item.Amount;
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price)
+                </td>
+                <td>
+                    @sum
+                    @{i++; t = t + sum;}
+                </td>
+            </tr>
+        }
         <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
-            </td>
-
+            <td colspan="4" class="table-active">Tổng tiền</td>
+            <td>@t</td>
         </tr>
-    }
     </tbody>
 </table>

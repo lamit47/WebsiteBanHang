@@ -7,14 +7,14 @@
         <tr>
             <th scope="col">Mã</th>
             <th scope="col">Mã khuyến mãi</th>
-            <th scope="col">Nước</th>
-            <th scope="col">Tỉnh/Thành phố</th>
             <th scope="col">Tên Nhân Viên</th>
             <th scope="col">Tên khách hàng</th>
             <th scope="col">Ngày và giờ đặt hàng</th>
             <th scope="col">Địa chỉ</th>
+            <th scope="col">Nước</th>
+            <th scope="col">Tỉnh/Thành phố</th>
             <th scope="col">Trang thái đơn hàng</th>
-            <th scope="col">Chi tiết</th>
+            <th scope="col">Xem chi tiết</th>
         </tr>
     </thead>
     <tbody>
@@ -23,57 +23,20 @@
             <tr>
                 <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
                 <td>@Html.DisplayFor(modelItem => item.Promotion.Name)</td>
-                <td> @Html.DisplayFor(modelItem => item.Country.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Province.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.NameStaff)</td>
                 <td>@Html.DisplayFor(modelItem => item.NameCustomer)</td>
                 <td>@Html.DisplayFor(modelItem => item.Date)</td>
                 <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Province.Name)</td>
                 <td>
-                    <a href="#" class="btn-active" data-id="@item.Id">@(item.PaymentStatus ? "Duyệt":"Đã duyệt")</a>
-                    @*@Html.DisplayFor(modelItem => item.PaymentStatus)*@
+                    <a href="#" class="btn btn-warning" data-id="@item.Id" id="btn-accept">@(item.PaymentStatus ? "Đã chấp nhận" : "Chưa chấp nhận")</a>
                 </td>
-                <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id })</td>
+                <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" } )</td>
             </tr>
         }
     </tbody>
 </table>
 
 @Html.Raw(ViewBag.Paging)
-
-@section scripts
-{
-    <script>
-        var invoice = {
-            init: function () {
-                invoice.registerEvents();
-            },
-            registerEvents: function () {
-                $('.btn-active').off('click').on('click', function (e) {
-                    e.preventDefault();
-                    var btn = $(this);
-                    var id = btn.data('id');
-                    $.ajax({
-                        url: "/Admin/Invoice/ChangeStatus",
-                        data: { id: id },
-                        dataType: "json",
-                        type: "POST",
-                        success: function (response) {
-                            console.log(response);
-                            if (response.PaymentStatus == true) {
-                                btn.text("Duyệt");
-
-                            }
-                            else {
-                                btn.text("Chưa duyệt");
-                            }
-                        }
-                    });
-                });
-            }
-        }
-        invoice.init();
-    </script>
-
-}
 
