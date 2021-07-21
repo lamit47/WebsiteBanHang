@@ -1,0 +1,25 @@
+﻿@model IEnumerable<GearBatOn.Models.Category>
+
+@{
+    ViewBag.Title = "PartialCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Content/custom.css" rel="stylesheet" />
+}
+
+<table>
+    <tr>
+        <th>
+            DANH MỤC SẢN PHẨM
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="displayProduct('@item.Id')"> @*gọi function này xử lý hiển thị sản phẩm theo category*@
+            <td class="btn btn-lg btn-secondary">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+</table>
