@@ -1,6 +1,7 @@
 ﻿using GearBatOn.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,8 +23,8 @@ namespace GearBatOn.Controllers
         {
             if (page == null) page = 1;
             int take = 10;
-            int total = _dbContext.Products.Count();
-            List<Product> products = _dbContext.Products.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+            int total = _dbContext.Products.Where(x => x.Status == true).Count();
+            List<Product> products = _dbContext.Products.Where(x => x.Status == true).OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
             ViewBag.Paging = pg.Pagination(total, (int)page, take);
 
             return PartialView("PartialProduct", products);
@@ -39,6 +40,16 @@ namespace GearBatOn.Controllers
             return View(product);
         }
 
+        [HttpPost, ActionName("Create")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Product product)
+        {
+            product.Status = true;
+            _dbContext.Products.Add(product);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Edit(int id)
         {
             Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
@@ -47,6 +58,21 @@ namespace GearBatOn.Controllers
             product.ListBrand = _dbContext.Brands.ToList();
 
             return View(product);
+        }
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Product product)
+        {
+            Product temp = _dbContext.Products.FirstOrDefault(x => x.Id == product.Id);
+            if (temp == null)
+            {
+                return HttpNotFound();
+            }
+            product.Status = true;
+            _dbContext.Products.AddOrUpdate(product);
+            _dbContext.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
@@ -59,6 +85,19 @@ namespace GearBatOn.Controllers
         {
             Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
             return View(product);
+        }
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteItem(int id)
+        {
+            Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            product.Status = false;
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
