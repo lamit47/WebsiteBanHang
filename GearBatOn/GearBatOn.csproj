@@ -183,6 +183,7 @@
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\GearBatOnContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceDetail.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -324,6 +326,7 @@
     <Content Include="Views\Promotion\Edit.cshtml" />
     <Content Include="Views\Promotion\Index.cshtml" />
     <Content Include="Views\Promotion\PartialPromo.cshtml" />
+    <Content Include="Views\Image\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

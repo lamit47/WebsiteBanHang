@@ -75,14 +75,6 @@
         </div>
 
         <div class="input-group">
-            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-            <div class="col-sm-10">
-                @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="input-group">
             <label class="col-sm-2 col-form-label">Mô tả</label>
             <div class="col-sm-10">
                 @Html.TextAreaFor(model => model.Description, 20, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })

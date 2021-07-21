@@ -16,6 +16,7 @@ namespace GearBatOn.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            Images = new HashSet<Image>();
             InvoiceDetails = new HashSet<InvoiceDetail>();
         }
 
@@ -41,9 +42,6 @@ namespace GearBatOn.Models
 
         public int InventoryAmount { get; set; }
 
-        [StringLength(255)]
-        public string ImagePath { get; set; }
-
         public bool Status { get; set; }
 
         public virtual Brand Brand { get; set; }
@@ -51,6 +49,9 @@ namespace GearBatOn.Models
         public virtual Category Category { get; set; }
 
         public virtual Country Country { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }

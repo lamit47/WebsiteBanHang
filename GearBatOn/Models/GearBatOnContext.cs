@@ -15,6 +15,7 @@ namespace GearBatOn.Models
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
@@ -52,10 +53,6 @@ namespace GearBatOn.Models
                 .HasMany(e => e.InvoiceDetails)
                 .WithRequired(e => e.Invoice)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Price)

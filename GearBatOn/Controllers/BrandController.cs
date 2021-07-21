@@ -20,8 +20,8 @@ namespace GearBatOn.Controllers
         {
             if (page == null) page = 1;
             int take = 10;
-            int total = _dbContext.Brands.Count();
-            List<Brand> dsBrand = _dbContext.Brands.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+            int total = _dbContext.Brands.Where(x => x.Status == true).Count();
+            List<Brand> dsBrand = _dbContext.Brands.Where(x => x.Status == true).OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
             ViewBag.Paging = pg.Pagination(total, (int)page, take);
 
             return PartialView("PartialBrand", dsBrand);
@@ -79,7 +79,7 @@ namespace GearBatOn.Controllers
         public ActionResult DeleteItem(int id)
         {
             Brand brands = _dbContext.Brands.FirstOrDefault(x => x.Id == id);
-            _dbContext.Brands.Remove(brands);
+            brands.Status = false;
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
         }

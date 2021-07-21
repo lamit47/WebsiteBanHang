@@ -84,7 +84,7 @@ namespace GearBatOn.Controllers
         public ActionResult DeleteItem(int id)
         {
             Promotion promo = context.Promotions.FirstOrDefault(x => x.Id == id);
-            context.Promotions.Remove(promo);
+            promo.Status = false;
             context.SaveChanges();
             return RedirectToAction("Index");
         }

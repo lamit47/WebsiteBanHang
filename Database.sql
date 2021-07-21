@@ -30,23 +30,25 @@ INSERT INTO Province VALUES (1, N'Buôn Mê Thuột');
 CREATE TABLE Category
 (
 	Id INT IDENTITY PRIMARY KEY,
-	Name NVARCHAR(255) NOT NULL DEFAULT N'Chưa đặt tên'
+	Name NVARCHAR(255) NOT NULL DEFAULT N'Chưa đặt tên',
+	Status BIT NOT NULL DEFAULT 1, --False xóa
 )
-INSERT INTO Category VALUES (N'Laptop');
-INSERT INTO Category VALUES (N'PC');
-INSERT INTO Category VALUES (N'CPU');
-INSERT INTO Category VALUES (N'Màn hình');
+INSERT INTO Category VALUES (N'Laptop', 1);
+INSERT INTO Category VALUES (N'PC', 1);
+INSERT INTO Category VALUES (N'CPU', 1);
+INSERT INTO Category VALUES (N'Màn hình', 1);
 
 CREATE TABLE Brand
 (
 	Id INT IDENTITY PRIMARY KEY,
-	Name NVARCHAR(255) NOT NULL DEFAULT N'Chưa đặt tên'
+	Name NVARCHAR(255) NOT NULL DEFAULT N'Chưa đặt tên',
+	Status BIT NOT NULL DEFAULT 1, --False xóa
 )
-INSERT INTO Brand VALUES (N'Intel');
-INSERT INTO Brand VALUES (N'AMD');
-INSERT INTO Brand VALUES (N'Asus');
-INSERT INTO Brand VALUES (N'Acer');
-INSERT INTO Brand VALUES (N'Ducky');
+INSERT INTO Brand VALUES (N'Intel', 1);
+INSERT INTO Brand VALUES (N'AMD', 1);
+INSERT INTO Brand VALUES (N'Asus', 1);
+INSERT INTO Brand VALUES (N'Acer', 1);
+INSERT INTO Brand VALUES (N'Ducky', 1);
 
 CREATE TABLE Product
 (
@@ -59,14 +61,22 @@ CREATE TABLE Product
 	Price MONEY NOT NULL DEFAULT 0,
 	WarrantyPeriod INT NOT NULL DEFAULT 0,
 	InventoryAmount INT NOT NULL DEFAULT 0,
-	ImagePath NVARCHAR(255),
-	Status BIT NOT NULL, --False xóa
+	Status BIT NOT NULL DEFAULT 1, --False xóa
 
 	FOREIGN KEY (CountryId) REFERENCES Country(Id),
 	FOREIGN KEY (CategoryId) REFERENCES Category(Id),
 	FOREIGN KEY (BrandId) REFERENCES Brand(Id)
 )
-INSERT INTO Product VALUES (N'Ryzen Threadripper 3960X', 3, 3, 2, N'Test', '36590000', 36, 100, N'AMD3960x.png', 1);
+INSERT INTO Product VALUES (N'Ryzen Threadripper 3960X', 3, 3, 2, N'Test', '36590000', 36, 100, 1);
+
+CREATE TABLE Images 
+(
+	Id INT IDENTITY PRIMARY KEY,
+	ImagePath NVARCHAR(255) NOT NULL UNIQUE,
+	ProductId INT,
+
+	FOREIGN KEY (ProductId) REFERENCES Product(Id)
+)
 
 CREATE TABLE Promotion
 (

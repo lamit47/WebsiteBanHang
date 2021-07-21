@@ -14,13 +14,13 @@ namespace GearBatOn.Controllers
         // GET: Category
         public ActionResult PartialCategory()
         {
-            List<Category> categoriesList = _dbContext.Categories.ToList();
-            return PartialView( "PartialCategory" ,categoriesList);
+            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
+            return PartialView("PartialCategory" ,categoriesList);
         }
 
         public ActionResult CategoryList()
         {
-            List<Category> categoriesList = _dbContext.Categories.ToList();
+            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
             return View(categoriesList);
         }
 
@@ -34,6 +34,7 @@ namespace GearBatOn.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Category category)
         {
+            category.Status = true;
             _dbContext.Categories.AddOrUpdate(category);
             _dbContext.SaveChanges();
             return RedirectToAction("CategoryList");
@@ -43,7 +44,7 @@ namespace GearBatOn.Controllers
         public ActionResult Delete(int Id)
         {
             Category category = _dbContext.Categories.FirstOrDefault(x => x.Id == Id);
-            _dbContext.Categories.Remove(category);
+            category.Status = false;
             _dbContext.SaveChanges();
             return RedirectToAction("CategoryList");
         }
@@ -59,6 +60,7 @@ namespace GearBatOn.Controllers
             Category temp = _dbContext.Categories.FirstOrDefault(x => x.Id == category.Id);
             if (temp == null)
             {
+                category.Status = true;
                 _dbContext.Categories.AddOrUpdate(category);
                 _dbContext.SaveChanges();
                 return RedirectToAction("CategoryList");
