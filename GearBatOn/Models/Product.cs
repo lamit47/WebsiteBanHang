@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,24 +24,30 @@ namespace GearBatOn.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
+        [StringLength(255, ErrorMessage = "Tên sản phẩm không được quá 255 ký tự")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Mã danh mục không được để trống")]
         public int CategoryId { get; set; }
 
+        [Required(ErrorMessage = "Mã nước sản xuất không được để trống")]
         public int CountryId { get; set; }
 
+        [Required(ErrorMessage = "Mã hãng sản xuất không được để trống")]
         public int BrandId { get; set; }
 
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
 
+        [Required(ErrorMessage = "Giá không được để trống")]
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
+        [Required(ErrorMessage = "Thời gian bảo hành không được để trống")]
         public int WarrantyPeriod { get; set; }
 
+        [Required(ErrorMessage = "Tồn kho không được để trống")]
         public int InventoryAmount { get; set; }
 
         public bool Status { get; set; }

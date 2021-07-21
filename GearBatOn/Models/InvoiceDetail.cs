@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,10 +10,13 @@ namespace GearBatOn.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "Mã hóa đơn không được để trống")]
         public int InvoiceId { get; set; }
 
+        [Required(ErrorMessage = "Mã sản phẩm không được để trống")]
         public int ProductId { get; set; }
 
+        [Required(ErrorMessage = "Số lượng không được để trống")]
         public int Amount { get; set; }
 
         public virtual Invoice Invoice { get; set; }

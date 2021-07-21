@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +10,7 @@ namespace GearBatOn.Models
     public partial class Image
     {
         [NotMapped]
+        [Required(ErrorMessage = "Bắt buộc chọn tệp hình ảnh")]
         public HttpPostedFileBase ImageFile { get; set; }
 
         public int Id { get; set; }

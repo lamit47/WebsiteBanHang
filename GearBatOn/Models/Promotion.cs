@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,14 +17,15 @@ namespace GearBatOn.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Tên khuyến mãi không được để trống")]
+        [StringLength(255, ErrorMessage = "Tên khuyến mãi không được quá 255  ký tự")]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Mã khuyến mãi không được để trống")]
+        [StringLength(255, ErrorMessage = "Mã khuyến mãi không được quá 255  ký tự")]
         public string PromoCode { get; set; }
 
+        [Required(ErrorMessage = "Tỷ lệ không được để trống")]
         public double Ratio { get; set; }
 
         public bool Status { get; set; }

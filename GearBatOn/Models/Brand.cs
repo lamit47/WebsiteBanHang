@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace GearBatOn.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Tên hãng không được để trống")]
+        [StringLength(255, ErrorMessage = "Tên hãng không được quá 255 ký tự")]
         public string Name { get; set; }
 
         public bool Status { get; set; }

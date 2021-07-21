@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,24 +19,26 @@ namespace GearBatOn.Models
 
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        [Required(ErrorMessage = "Mã nhân viên không được để trống")]
+        [StringLength(128, ErrorMessage = "Mã nhân viên không được quá 128 ký tự")]
         public string StaffId { get; set; }
 
-        [Required]
-        [StringLength(128)]
+        [Required(ErrorMessage = "Mã khách hàng không được để trống")]
+        [StringLength(128, ErrorMessage = "Mã khách hàng không được quá 128 ký tự")]
         public string CustomerId { get; set; }
 
         public DateTime Date { get; set; }
 
         public int? PromotionId { get; set; }
 
+        [Required(ErrorMessage = "Đất nước không được để trống")]
         public int CountryId { get; set; }
 
+        [Required(ErrorMessage = "Tỉnh thành không được để trống")]
         public int ProvinceId { get; set; }
 
-        [Required]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Địa chỉ không được để trống")]
+        [StringLength(255, ErrorMessage = "Địa chỉ không được quá 255 ký tự")]
         public string Address { get; set; }
 
         public bool PaymentStatus { get; set; }
