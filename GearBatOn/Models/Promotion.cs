@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,14 +19,16 @@ namespace GearBatOn.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Tên Khuyến Mãi")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Mã Khuyễn Mãi")]
         public string PromoCode { get; set; }
-
+        [Display(Name = "Phầm trăm")]
         public double Ratio { get; set; }
-
+        [Display(Name = "Trạng thái")]
         public bool Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
