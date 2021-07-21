@@ -1,44 +1,31 @@
 ﻿@model IEnumerable<GearBatOn.Models.Promotion>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PromoCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ratio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table table-bordered border-primary">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PromoCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ratio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            <th scope="col">Mã</th>
+            <th scope="col">Tên khuyến mãi</th>
+            <th scope="col">Mã khuyến mãi</th>
+            <th scope="col">Tỷ lệ</th>
+            <th scope="col">Sửa/Chi tiết/Xóa</th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.PromoCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.Ratio)</td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+
 @Html.Raw(ViewBag.Paging)

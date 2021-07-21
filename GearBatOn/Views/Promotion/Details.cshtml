@@ -10,42 +10,21 @@
 <div>
     <h4>Promotion</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <dl class="row">
+        <dt class="col-sm-3">Mã</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Id)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <dt class="col-sm-3">Tên khuyến mãi</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PromoCode)
-        </dt>
+        <dt class="col-sm-3">Mã khuyến mãi</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.PromoCode)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PromoCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ratio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ratio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
+        <dt class="col-sm-3">Tỷ lệ</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Ratio)</dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+    @Html.ActionLink("Quay trở lại danh sách", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
 </p>

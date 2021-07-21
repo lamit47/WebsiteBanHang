@@ -227,10 +227,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\Products\50230_amd_threadripper.jpg" />
-    <Content Include="Images\Products\50230_amd_threadripper_2.jpg" />
-    <Content Include="Images\Products\50230_amd_threadripper_3.jpg" />
-    <Content Include="Images\Products\50230_hnc_ryzen_threadripper_3960x_right_facing_850x850.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -330,6 +326,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

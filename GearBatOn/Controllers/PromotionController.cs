@@ -36,6 +36,7 @@ namespace GearBatOn.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Promotion promo)
         {
+            promo.Status = true;
             context.Promotions.Add(promo);
             context.SaveChanges();
             return RedirectToAction("Index");

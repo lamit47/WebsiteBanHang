@@ -34,6 +34,7 @@ namespace GearBatOn.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Brand brands)
         {
+            brands.Status = true;
             _dbContext.Brands.Add(brands);
             _dbContext.SaveChanges();
             return RedirectToAction("Index");
@@ -52,8 +53,9 @@ namespace GearBatOn.Controllers
             if (b != null)
             {
                 b.Name = name;
+                b.Status = true;
+                _dbContext.SaveChanges();
             }
-            _dbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
