@@ -1,4 +1,4 @@
-namespace GearBatOn.Models
+﻿namespace GearBatOn.Models
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace GearBatOn.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Tên Nhà Sản Xuất")]
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
