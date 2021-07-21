@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GearBatOn.Models.InvoiceDetail>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi tiết đơn đặt hàng</h2>
+
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+
+            <th>
+                Tên sản phẩm
+                @*@Html.DisplayNameFor(model => model.Product.Name)*@
+            </th>
+            <th>
+                Số lượng
+                @*@Html.DisplayNameFor(model => model.Amount)*@
+            </th>
+            <th>
+                Tổng tiền
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+
+        </tr>
+    }
+    </tbody>
+</table>
