@@ -41,12 +41,13 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
-<div class="form-actions no-color">
-    <input type="submit" value="Xóa" class="btn btn-danger" />
-    @Html.ActionLink("Quay trở lại danh sách", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
-</div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-danger" />
+            @Html.ActionLink("Quay trở lại danh sách", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
+        </div>
     }
 </div>

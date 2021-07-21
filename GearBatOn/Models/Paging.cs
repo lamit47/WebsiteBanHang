@@ -23,8 +23,8 @@ namespace GearBatOn.Models
                 string numPage = "";
                 if (totalPage < 1) return "";
                 numPage += "<nav aria-label='paging'><ul class='pagination justify-content-center'>";
-                if (current > 1) numPage += "<li class='page-item'><a class='page-link' href='#' onclick='Paging(" + (page - 1) + ")'>Previous</a></li>";
-                else numPage += "<li class='page-item disabled'><a class='page-link' href='#'>Previous</a></li>";
+                if (current > 1) numPage += "<li class='page-item'><a class='page-link' href='#' onclick='Paging(" + (page - 1) + ")'>&laquo;</a></li>";
+                else numPage += "<li class='page-item disabled'><a class='page-link' href='#'>&laquo;</a></li>";
                 if (current > (offset + 1)) numPage += "<li class='page-item'><a class='page-link' href='#' onclick='Paging(1)'>1</a></li><li class='page-item disabled'><a class='page-link' href='#'>...</a></li>";
                 for (int i = 1; i <= totalPage; i++)
                 {
@@ -38,8 +38,8 @@ namespace GearBatOn.Models
                 {
                     numPage += "<li class='page-item disabled'><a class='page-link' href='#'>...</a></li><li class='page-item'><a class='page-link' href='#' onclick='Paging(" + totalPage + ")'>" + totalPage + "</a></li>";
                 }
-                if (current < totalPage) numPage += "<li class='page-item'><a class='page-link' href='#' onclick='Paging(" + (page + 1) + ")'>Next</a></li>";
-                else numPage += "<li class='page-item disabled'><a class='page-link' href='#'>Next</a></li>";
+                if (current < totalPage) numPage += "<li class='page-item'><a class='page-link' href='#' onclick='Paging(" + (page + 1) + ")'>&raquo;</a></li>";
+                else numPage += "<li class='page-item disabled'><a class='page-link' href='#'>&raquo;</a></li>";
                 numPage += "</ul></nav>";
                 return numPage;
             }

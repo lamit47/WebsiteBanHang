@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý hãng sản xuất";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Quản lý nhà sản xuất</h2>
+<h2>Quản lý hãng sản xuất</h2>
 
 <p>
-    @Html.ActionLink("Tạo mới", "Create")
+    @Html.ActionLink("Tạo mới", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
 </p>
-
+ 
 <div id="brand"></div>
 
 @section scripts
