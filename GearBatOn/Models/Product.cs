@@ -9,6 +9,10 @@ namespace GearBatOn.Models
     [Table("Product")]
     public partial class Product
     {
+        public List<Category> ListCategory = new List<Category>();
+        public List<Country> ListCountry = new List<Country>();
+        public List<Brand> ListBrand = new List<Brand>();
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
@@ -27,7 +31,7 @@ namespace GearBatOn.Models
 
         public int BrandId { get; set; }
 
-        [StringLength(4000)]
+        [Column(TypeName = "ntext")]
         public string Description { get; set; }
 
         [Column(TypeName = "money")]

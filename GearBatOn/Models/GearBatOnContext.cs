@@ -54,6 +54,10 @@ namespace GearBatOn.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
+                .Property(e => e.Description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Product>()
                 .Property(e => e.Price)
                 .HasPrecision(19, 4);
 

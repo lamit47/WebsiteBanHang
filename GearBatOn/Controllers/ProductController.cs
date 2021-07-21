@@ -31,12 +31,21 @@ namespace GearBatOn.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            Product product = new Product();
+            product.ListCategory = _dbContext.Categories.ToList();
+            product.ListCountry = _dbContext.Countries.ToList();
+            product.ListBrand = _dbContext.Brands.ToList();
+
+            return View(product);
         }
 
         public ActionResult Edit(int id)
         {
             Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
+            product.ListCategory = _dbContext.Categories.ToList();
+            product.ListCountry = _dbContext.Countries.ToList();
+            product.ListBrand = _dbContext.Brands.ToList();
+
             return View(product);
         }
 

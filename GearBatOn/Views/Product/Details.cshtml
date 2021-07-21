@@ -1,47 +1,56 @@
 ﻿@model GearBatOn.Models.Product
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết sản phẩm";
+
+    var temp = Model.ImagePath.Split(';');
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>Product</h4>
+    <h4>Sản phẩm</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+        <dt class="col-sm-3">Mã sản phẩm</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Id)</dd>
+
+        <dt class="col-sm-3">Tên sản phẩm</dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CategoryId)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.CategoryId)</dd>
+        <dt class="col-sm-3">Danh mục</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Category.Name)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CountryId)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.CountryId)</dd>
+        <dt class="col-sm-3">Nơi sản xuất</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Country.Name)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.BrandId)</dt>
-        <dd class="col-sm-9">@@Html.DisplayFor(model => model.BrandId)</dd>
+        <dt class="col-sm-3">Hãng sản xuất</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Brand.Name)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Description)</dd>
-
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dt class="col-sm-3">Giá</dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.WarrantyPeriod)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.WarrantyPeriod)</dd>
+        <dt class="col-sm-3">Thời gian bảo hành</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.WarrantyPeriod)/Tháng</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.InventoryAmount)</dt>
+        <dt class="col-sm-3">Tồn kho</dt>
         <dd class="col-sm-9">@Html.DisplayFor(model => model.InventoryAmount)</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ImagePath)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.ImagePath)</dd>
+        <dt class="col-sm-3">Hình ảnh</dt>
+        <dd class="col-sm-9">
+            @foreach (var item in temp)
+            {
+                <img src="~/Images/Products/@Url.Content(item)" width="150" height="150" />
+            }
+        </dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
-        <dd class="col-sm-9">@Html.DisplayFor(model => model.Status)</dd>
+        <dt class="col-sm-3">Mô tả sản phẩm</dt>
+        <dd class="col-sm-9">
+            @Html.TextAreaFor(model => model.Description, 20, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", routeValues: null, htmlAttributes: new { id = Model.Id, @class = "btn btn-primary", type = "button" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
     @Html.ActionLink("Back to List", "Index", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", type = "button" })
 </p>

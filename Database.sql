@@ -55,7 +55,7 @@ CREATE TABLE Product
 	CategoryId INT NOT NULL,
 	CountryId INT NOT NULL,
 	BrandId INT NOT NULL,
-	Description NVARCHAR(4000),
+	Description NTEXT,
 	Price MONEY NOT NULL DEFAULT 0,
 	WarrantyPeriod INT NOT NULL DEFAULT 0,
 	InventoryAmount INT NOT NULL DEFAULT 0,

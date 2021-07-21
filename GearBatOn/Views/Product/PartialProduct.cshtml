@@ -3,16 +3,15 @@
 <table class="table table-bordered border-primary">
     <thead>
         <tr>
-            <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.CategoryId)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.CountryId)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.BrandId)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.Description)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.Price)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.WarrantyPeriod)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.InventoryAmount)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.ImagePath)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.Status)</th>
+            <th scope="col">Mã</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Danh mục</th>
+            <th scope="col">Sản xuất</th>
+            <th scope="col">Hãng</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Thời gian bảo hành</th>
+            <th scope="col">Tồn kho</th>
+            <th scope="col">Hình ảnh</th>
             <th scope="col">Sửa/Chi tiết/Xóa</th>
         </tr>
     </thead>
@@ -20,17 +19,15 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*<th scope="row">1</th>*@
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.CategoryId)</td>
-                <td>@Html.DisplayFor(modelItem => item.CountryId)</td>
-                <td>@Html.DisplayFor(modelItem => item.BrandId)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Brand.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>@Html.DisplayFor(modelItem => item.WarrantyPeriod)</td>
+                <td>@Html.DisplayFor(modelItem => item.WarrantyPeriod)/Tháng</td>
                 <td>@Html.DisplayFor(modelItem => item.InventoryAmount)</td>
-                <td>@Html.DisplayFor(modelItem => item.ImagePath)</td>
-                <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                <td><img src="~/Images/Products/@Html.DisplayFor(modelItem => item.ImagePath.Split(';')[0])" height="100" width="100"/></td>
                 <td>
                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
