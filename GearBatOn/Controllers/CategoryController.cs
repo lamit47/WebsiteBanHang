@@ -12,16 +12,16 @@ namespace GearBatOn.Controllers
     {
         GearBatOnContext _dbContext = new GearBatOnContext();
         // GET: Category
+        public ActionResult Index()
+        {
+            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
+            return View(categoriesList);
+        }
+
         public ActionResult PartialCategory()
         {
             List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
             return PartialView("PartialCategory" ,categoriesList);
-        }
-
-        public ActionResult CategoryList()
-        {
-            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
-            return View(categoriesList);
         }
 
         public ActionResult Edit(int Id)

@@ -1,5 +1,15 @@
 ﻿@model IEnumerable<GearBatOn.Models.Category>
 
+@{
+    ViewBag.Title = "Quản lý danh mục";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Quản lý danh mục</h2>
+<p>
+    @Html.ActionLink("Thêm danh mục", "Create", routeValues: null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+
 <table class="table table-bordered border-primary">
     <thead>
         <tr>
@@ -22,3 +32,4 @@
         }
     </tbody>
 </table>
+

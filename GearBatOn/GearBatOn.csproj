@@ -308,10 +308,9 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Category\CategoryList.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
     <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\PartialCategory.cshtml" />
     <Content Include="Views\Brand\Create.cshtml" />
     <Content Include="Views\Brand\Delete.cshtml" />
     <Content Include="Views\Brand\Details.cshtml" />
@@ -329,6 +328,7 @@
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\PartialInvoice.cshtml" />
+    <Content Include="Views\Category\PartialCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
