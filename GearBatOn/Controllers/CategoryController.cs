@@ -10,17 +10,22 @@ namespace GearBatOn.Controllers
 {
     public class CategoryController : Controller
     {
+        Paging pg = new Paging();
         GearBatOnContext _dbContext = new GearBatOnContext();
         // GET: Category
         public ActionResult Index()
         {
-            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
-            return View(categoriesList);
+            return View();
         }
 
-        public ActionResult PartialCategory()
+        public ActionResult PartialCategory(int? page)
         {
-            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).ToList();
+            if (page == null) page = 1;
+            int take = 10;
+            int total = _dbContext.Categories.Where(x => x.Status == true).Count();
+            List<Category> categoriesList = _dbContext.Categories.Where(x => x.Status == true).OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+            ViewBag.Paging = pg.Pagination(total, (int)page, take);
+
             return PartialView("PartialCategory" ,categoriesList);
         }
 
