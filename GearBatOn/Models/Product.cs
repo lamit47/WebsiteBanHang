@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     [Table("Product")]
     public partial class Product
@@ -38,10 +39,12 @@
         public int BrandId { get; set; }
 
         [Column(TypeName = "ntext")]
+        [AllowHtml]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Giá không được để trống")]
         [Column(TypeName = "money")]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:n}")]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Thời gian bảo hành không được để trống")]

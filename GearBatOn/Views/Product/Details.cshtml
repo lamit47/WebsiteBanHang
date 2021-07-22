@@ -44,7 +44,7 @@
 
         <dt class="col-sm-3">Mô tả sản phẩm</dt>
         <dd class="col-sm-9">
-            @Html.TextAreaFor(model => model.Description, 20, 40, htmlAttributes: new { style = "width: 100%; max-width: 100%;", @class = "form-control" })
+            <div id="description-product">@Html.Raw(Model.Description)</div>
         </dd>
     </dl>
 </div>

@@ -1,0 +1,160 @@
+﻿@model GearBatOn.Models.Product
+
+@{
+    ViewBag.Title = Model.Name;
+    bool flag = true;
+}
+<div style="height: 1rem;"></div>
+<div class="container">
+    <div class="row gy-5">
+        <div class="col-5">
+            <div id="gearbaton-carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @if (!Model.ListImage.Any())
+                    {
+                        <div class="carousel-item active">
+                            <img src="@Url.Content("~/Images/empty-image.png")" class="d-block w-100" />
+                        </div>
+                    }
+                    @foreach (var item in Model.ListImage)
+                    {
+                        if (flag)
+                        {
+                            flag = false;
+                            <div class="carousel-item active">
+                                <img src="@Url.Content(item.ImagePath ?? "~/Images/empty-image.png")" class="d-block w-100" />
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="carousel-item">
+                                <img src="@Url.Content(item.ImagePath ?? "~/Images/empty-image.png")" class="d-block w-100" />
+                            </div>
+                        }
+                    }
+                </div>
+                <button class="carousel-control-prev btn-dark" type="button" data-bs-target="#gearbaton-carousel"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next btn-dark" type="button" data-bs-target="#gearbaton-carousel"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-6" style="margin-left: 100px;">
+            <div id="name-product"><h3>@Html.DisplayFor(model => model.Name)</h3></div>
+            <br/>
+            <span><h5>Thông tin chung</h5></span>
+            <dl class="row">
+                <dt class="col-sm-3">Hãng sản xuất:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Brand.Name)</dd>
+
+                <dt class="col-sm-3">Xuất xứ:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Country.Name)</dd>
+
+                <dt class="col-sm-3">Bảo hành:</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.WarrantyPeriod)/Tháng</dd>
+            </dl>
+
+            <div id="price-product">
+                <span><b>Giá sản phẩm:</b> <h4 class="text-danger">@Html.DisplayFor(model => model.Price)₫</h4></span>
+            </div>
+
+            <a href="#" type="button" class="btn btn-outline-success">Đặt hàng</a>
+        </div>
+        <div id="tab-content" class="col-12">
+            <div id="name-product"><h3>Mô tả sản phẩm</h3></div>
+            <br />
+
+            <div id="description-product">@Html.Raw(Model.Description)</div>
+        </div>
+    </div>
+
+@*<div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CountryId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CountryId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BrandId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BrandId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.WarrantyPeriod)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.WarrantyPeriod)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.InventoryAmount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InventoryAmount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

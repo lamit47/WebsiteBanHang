@@ -43,3 +43,7 @@ main {
     margin-left: 200px;
     margin-right: 200px;
 }
+
+#description-product img {
+    width: 100%;
+}

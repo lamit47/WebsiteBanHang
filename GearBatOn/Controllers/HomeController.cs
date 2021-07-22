@@ -15,6 +15,19 @@ namespace GearBatOn.Controllers
             return View();
         }
 
+        public ActionResult Product(int id)
+        {
+            Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
+            product.ListImage = _dbContext.Images.Where(x => x.ProductId == product.Id).ToList();
+
+            return View(product);
+        }
+
+        public ActionResult ListProduct()
+        {
+            return View();
+        }
+
         public ActionResult PartialHomeProduct(int id)
         {
             List<Product> products = _dbContext.Products.Where(x => x.CategoryId == id).OrderBy(x => x.Id).Skip(0).Take(10).ToList();

@@ -337,6 +337,8 @@
     <Content Include="Views\ListAccount\PartialAccount.cshtml" />
     <Content Include="Views\Home\MegaMenu.cshtml" />
     <Content Include="Views\Home\PartialHomeProduct.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\ListProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
