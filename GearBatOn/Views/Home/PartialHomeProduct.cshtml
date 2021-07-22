@@ -1,0 +1,18 @@
+﻿@model IEnumerable<GearBatOn.Models.Product>
+
+
+<div class="row row-cols-1 row-cols-md-5 g-2">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card text-dark bg-light">
+                <img src="@Url.Content(item.FeatureImage ?? "~/Images/empty-image.png")" class="card-img-top">
+                <div class="card-body">
+                    <h6 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h6>
+                    <p class="card-text text-danger">@Html.DisplayFor(modelItem => item.Price)₫</p>
+                </div>
+            </div>
+        </div>
+        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })*@
+}
+</div>
