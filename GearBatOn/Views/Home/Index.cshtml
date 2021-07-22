@@ -7,7 +7,7 @@
 <div id="list-pc" class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>PC - Miễn phí giao hàng toàn quốc</h2>
-        <a href="#" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/2" class="float-right">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -15,7 +15,7 @@
 <div id="list-laptop" class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>Laptop - Miễn phí giao hàng toàn quốc</h2>
-        <a href="#" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/1" class="float-right">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -23,7 +23,7 @@
 <div id="list-monitor" class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>Màn hình - Miễn phí giao hàng toàn quốc</h2>
-        <a href="#" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/4" class="float-right">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -31,7 +31,7 @@
 <div id="list-keyboard" class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>Bàn phím - Miễn phí giao hàng toàn quốc</h2>
-        <a href="#" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/3" class="float-right">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -39,7 +39,7 @@
 <div id="list-mouse" class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>Chuột - Miễn phí giao hàng toàn quốc</h2>
-        <a href="#" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/3" class="float-right">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -82,7 +82,7 @@
         $.ajax({
             url: "/Home/PartialHomeProduct",
             type: "GET",
-            data: { id: 1 },
+            data: { id: 3 },
             success: function (data) {
                 $("#list-keyboard").append(data);
             },
@@ -93,7 +93,7 @@
         $.ajax({
             url: "/Home/PartialHomeProduct",
             type: "GET",
-            data: { id: 1 },
+            data: { id: 3 },
             success: function (data) {
                 $("#list-mouse").append(data);
             },

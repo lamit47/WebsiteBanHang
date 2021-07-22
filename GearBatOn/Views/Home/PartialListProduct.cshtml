@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<GearBatOn.Models.Product>
 
-
 <div class="row row-cols-1 row-cols-md-5 g-4">
     @foreach (var item in Model)
     {
         <div class="col">
             <div class="card text-dark bg-light" style="height: 335px;">
-                <img src="@Url.Content(item.FeatureImage ?? "~/Images/empty-image.png")" class="card-img-top" style="width: 230px; height: 230px; object-fit: cover;">
+                <img src="@Url.Content(item.FeatureImage ?? "~/Images/empty-image.png")" class="card-img-top" style="width: 237px; height: 237px; object-fit: cover;">
                 <div class="card-body">
                     <h6 class="card-title name-product">
                         @Html.ActionLink(item.Name, "Product", "Home", new { id = item.Id }, htmlAttributes: new { @class = "stretched-link text-dark", @style = "text-decoration: none;" })
@@ -17,3 +16,5 @@
         </div>
     }
 </div>
+<br />
+@Html.Raw(ViewBag.Paging)

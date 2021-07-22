@@ -1,81 +1,42 @@
-﻿@model IEnumerable<GearBatOn.Models.Product>
-
+﻿
 @{
     ViewBag.Title = "Danh sách sản phẩm";
 }
 
-<h2>Danh sách sản phẩm</h2>
+<div style="height: 1rem"></div>
+<div class="row g-3 card-group align-items-center">
+    <nav class="navbar navbar-light bg-light">
+        <h2>Danh sách sản phẩm</h2>
+    </nav>
+    <div id="list-products"></div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BrandId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WarrantyPeriod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InventoryAmount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BrandId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WarrantyPeriod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InventoryAmount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@section scripts
+{
+    <script>
+        $.ajax({
+            url: "/Home/PartialListProduct",
+            type: "GET",
+            data: { id: @Html.Raw(ViewBag.categoryId) },
+            success: function (data) {
+                $("#list-products").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        function Paging(page) {
+            $.ajax({
+                url: "/Home/PartialListProduct",
+                type: "GET",
+                data: { id: @Html.Raw(ViewBag.categoryId), page: page },
+                success: function (data) {
+                    $("#list-products").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
 }
-
-</table>
