@@ -1,6 +1,7 @@
 ﻿using GearBatOn.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -33,20 +34,14 @@ namespace GearBatOn.Controllers
         }
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(string id, string Email, bool EmailConfirmed, string PhoneNumber, bool PhoneNumberConfirmed, int AccessFailedCount, string UserName, string FullName)
+        public ActionResult Edit(AspNetUser user)
         {
-            AspNetUser b = _dbContext.AspNetUsers.FirstOrDefault(x => x.Id == id);
+            AspNetUser b = _dbContext.AspNetUsers.FirstOrDefault(x => x.Id == user.Id);
             if (b != null)
             {
-                b.Email = Email;
-                b.EmailConfirmed = EmailConfirmed;
-                b.PhoneNumber = PhoneNumber;
-                b.PhoneNumberConfirmed = PhoneNumberConfirmed;
-                b.AccessFailedCount = AccessFailedCount;
-                b.UserName = UserName;
-                b.FullName = FullName;
+                _dbContext.AspNetUsers.AddOrUpdate(user);
+                _dbContext.SaveChanges();
             }
-            _dbContext.SaveChanges();
 
             return RedirectToAction("Index");
         }
