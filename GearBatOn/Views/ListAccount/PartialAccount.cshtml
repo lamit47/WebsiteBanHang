@@ -1,0 +1,29 @@
+﻿@model IEnumerable<GearBatOn.Models.AspNetUser>
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">Mã tài khoản</th>
+            <th scope="col">Địa chỉ email</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Họ và tên</th>
+            <th scope="col">Sửa/Phân quyền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>
+                    @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Phân Quyền", "Role", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.Raw(ViewBag.Paging)

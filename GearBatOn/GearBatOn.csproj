@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\ListAccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
@@ -192,6 +193,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetUser.cs" />
     <Compile Include="Models\Brand.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Country.cs" />
@@ -329,6 +331,9 @@
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Invoice\PartialInvoice.cshtml" />
     <Content Include="Views\Category\PartialCategory.cshtml" />
+    <Content Include="Views\ListAccount\Edit.cshtml" />
+    <Content Include="Views\ListAccount\Index.cshtml" />
+    <Content Include="Views\ListAccount\PartialAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
