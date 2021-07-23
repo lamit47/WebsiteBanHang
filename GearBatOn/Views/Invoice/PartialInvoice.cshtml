@@ -7,7 +7,6 @@
         <tr>
             <th scope="col">Mã</th>
             <th scope="col">Mã khuyến mãi</th>
-            <th scope="col">Tên Nhân Viên</th>
             <th scope="col">Tên khách hàng</th>
             <th scope="col">Ngày và giờ đặt hàng</th>
             <th scope="col">Địa chỉ</th>
@@ -22,8 +21,9 @@
         {
             <tr>
                 <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
-                <td>@Html.DisplayFor(modelItem => item.Promotion.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.NameStaff)</td>
+                <td>
+                    @(item.PromotionId == null ? @Html.Raw("Không có") : @Html.DisplayFor(modelItem => item.Promotion.Name))
+                </td>
                 <td>@Html.DisplayFor(modelItem => item.NameCustomer)</td>
                 <td>@Html.DisplayFor(modelItem => item.Date)</td>
                 <td>@Html.DisplayFor(modelItem => item.Address)</td>
@@ -32,7 +32,7 @@
                 <td>
                     <a href="#" class="btn btn-warning" data-id="@item.Id" id="btn-accept">@(item.PaymentStatus ? "Đã chấp nhận" : "Chưa chấp nhận")</a>
                 </td>
-                <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" } )</td>
+                <td>@Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
             </tr>
         }
     </tbody>

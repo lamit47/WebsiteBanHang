@@ -9,8 +9,8 @@
     [Table("Invoice")]
     public partial class Invoice
     {
-        public string NameStaff;
         public string NameCustomer;
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Invoice()
         {
@@ -18,10 +18,6 @@
         }
 
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Mã nhân viên không được để trống")]
-        [StringLength(128, ErrorMessage = "Mã nhân viên không được quá 128 ký tự")]
-        public string StaffId { get; set; }
 
         [Required(ErrorMessage = "Mã khách hàng không được để trống")]
         [StringLength(128, ErrorMessage = "Mã khách hàng không được quá 128 ký tự")]
@@ -42,6 +38,8 @@
         public string Address { get; set; }
 
         public bool PaymentStatus { get; set; }
+
+        public virtual AspNetUser AspNetUser { get; set; }
 
         public virtual Country Country { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GearBatOn.Models.InvoiceDetail>
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi tiết đơn đặt hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int i = 1;
     decimal t = 0;
@@ -36,17 +36,17 @@
                     @Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Product.Price)
+                    @Html.DisplayFor(modelItem => item.Product.Price)₫
                 </td>
                 <td>
-                    @sum
+                    @string.Format("{0:n}", @sum)₫
                     @{i++; t = t + sum;}
                 </td>
             </tr>
         }
         <tr>
             <td colspan="4" class="table-active">Tổng tiền</td>
-            <td>@t</td>
+            <td>@string.Format("{0:n}", @t)₫</td>
         </tr>
     </tbody>
 </table>

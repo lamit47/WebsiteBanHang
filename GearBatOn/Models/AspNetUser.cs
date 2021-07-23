@@ -8,6 +8,12 @@ namespace GearBatOn.Models
 
     public partial class AspNetUser
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public AspNetUser()
+        {
+            Invoices = new HashSet<Invoice>();
+        }
+
         public string Id { get; set; }
 
         [StringLength(256)]
@@ -35,7 +41,10 @@ namespace GearBatOn.Models
         [StringLength(256)]
         public string UserName { get; set; }
 
-        [StringLength(255)]
+        [StringLength(256)]
         public string FullName { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

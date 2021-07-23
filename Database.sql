@@ -93,8 +93,7 @@ INSERT INTO Promotion VALUES (N'Test 30', N'KM30', 30, 1);
 CREATE TABLE Invoice
 (
 	Id INT IDENTITY PRIMARY KEY,
-	StaffId nvarchar(128) NOT NULL,
-	CustomerId nvarchar(128) NOT NULL DEFAULT 2,
+	CustomerId nvarchar(128) NOT NULL,
 	Date DATETIME NOT NULL DEFAULT GETDATE(),
 	PromotionId INT,
 	CountryId INT NOT NULL,
@@ -103,7 +102,6 @@ CREATE TABLE Invoice
 	PaymentStatus BIT NOT NULL DEFAULT 0,
 	
 	FOREIGN KEY (PromotionId) REFERENCES Promotion(Id),
-	FOREIGN KEY (StaffId) REFERENCES AspNetUsers(Id),
 	FOREIGN KEY (CustomerId) REFERENCES AspNetUsers(Id),
 	FOREIGN KEY (CountryId) REFERENCES Country(Id),
 	FOREIGN KEY (ProvinceId) REFERENCES Province(Id)

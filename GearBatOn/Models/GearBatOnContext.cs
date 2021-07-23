@@ -12,6 +12,7 @@ namespace GearBatOn.Models
         {
         }
 
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -21,10 +22,15 @@ namespace GearBatOn.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetUser>()
+                .HasMany(e => e.Invoices)
+                .WithRequired(e => e.AspNetUser)
+                .HasForeignKey(e => e.CustomerId)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Brand>()
                 .HasMany(e => e.Products)
                 .WithRequired(e => e.Brand)

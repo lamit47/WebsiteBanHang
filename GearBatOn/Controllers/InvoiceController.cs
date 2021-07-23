@@ -28,9 +28,7 @@ namespace GearBatOn.Controllers
                List<Invoice> invoices = _dbContext.Invoices.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                foreach (var item in invoices)
                {
-                    ApplicationUser staff = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.StaffId);
                     ApplicationUser customer = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.CustomerId);
-                    item.NameStaff = staff.FullName;
                     item.NameCustomer = customer.FullName;
                 }
                 ViewBag.Paging = pg.Pagination(total, (int)page, take);
