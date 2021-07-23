@@ -53,7 +53,9 @@
         getProductByCategory("list-mouse", 3);
         function showCategory(id) {
             $(".gearbaton-category").hide();
+            $(".gearbaton-category").removeClass("list-group-item");
             $("#" + id).show();
+            $("#" + id).addClass("list-group-item");
         }
         function getProductByCategory(name, categoryId) {
             $.ajax({

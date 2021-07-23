@@ -55,3 +55,13 @@ main {
     -webkit-line-clamp: 2; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
+
+#megamenu a {
+    text-decoration: none;
+    color: black;
+}
+
+#megamenu a:hover {
+    text-decoration: none;
+    color: palevioletred;
+}
