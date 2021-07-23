@@ -38,8 +38,11 @@ namespace GearBatOn.Controllers
             return PartialView("PartialHomeProduct", products);
         }
 
-        public ActionResult ListProduct(int? id, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
+        public ActionResult ListProduct(int? id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
         {
+            if (query == null) ViewBag.query = "all";
+            else ViewBag.query = query;
+
             if (id == null) {
                 ViewBag.categoryId = 0;
                 ViewBag.sortBy = "latest";
@@ -49,6 +52,7 @@ namespace GearBatOn.Controllers
                 return View();
             }
             else ViewBag.categoryId = id;
+
 
             if (sortBy == null) ViewBag.sortBy = "latest";
             else ViewBag.sortBy = sortBy;
@@ -65,18 +69,18 @@ namespace GearBatOn.Controllers
             return View();
         }
 
-        public ActionResult PartialListProduct(int id, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
+        public ActionResult PartialListProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
         {
             if (page == null) page = 1;
             int take = 20;
-            var result = GetProduct(id, sortBy, fromPrice, toPrice, page, take);
+            var result = GetProduct(id, query, sortBy, fromPrice, toPrice, page, take);
             
             ViewBag.Paging = pg.Pagination(result.Item1, (int)page, take);
 
             return PartialView("PartialListProduct", result.Item2);
         }
 
-        public (int, List<Product>) GetProduct(int id, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, int take)
+        public (int, List<Product>) GetProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, int take)
         {
             List<Product> tempProducts;
 
@@ -117,6 +121,11 @@ namespace GearBatOn.Controllers
                 default:
                     tempProducts = tempProducts.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                     break;
+            }
+
+            if (query != "all")
+            {
+                tempProducts = tempProducts.Where(x => x.Name.ToLower().Contains(query.ToLower())).ToList();
             }
 
             foreach (var item in tempProducts)
