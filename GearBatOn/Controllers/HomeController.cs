@@ -113,13 +113,13 @@ namespace GearBatOn.Controllers
                     tempProducts = tempProducts.OrderByDescending(x => x.Name).Skip(((int)page - 1) * take).Take(take).ToList();
                     break;
                 case "oldest":
-                    tempProducts = tempProducts.OrderByDescending(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+                    tempProducts = tempProducts.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                     break;
                 //case "latest":
                 //    tempProducts = tempProducts.OrderByDescending(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                 //    break;
                 default:
-                    tempProducts = tempProducts.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+                    tempProducts = tempProducts.OrderByDescending(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                     break;
             }
 
