@@ -13,10 +13,18 @@ namespace GearBatOn
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //Homepage
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            //Dashboard
+            routes.MapRoute(
+                name: "Dashboard",
+                url: "Dash/{controller}/{action}/{id}",
+                defaults: new { controller = "Invoice", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

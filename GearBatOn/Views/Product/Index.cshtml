@@ -13,16 +13,7 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Product/PartialProduct",
-            type: "GET",
-            success: function (data) {
-                $("#product").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
         function Paging(page) {
             $.ajax({
                 url: "/Product/PartialProduct",

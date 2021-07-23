@@ -16,16 +16,7 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Promotion/PartialPromo",
-            type: "GET",
-            success: function (data) {
-                $("#promotion").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
         function Paging(page) {
             $.ajax({
                 url: "/Promotion/PartialPromo",

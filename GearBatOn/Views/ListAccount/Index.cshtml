@@ -6,22 +6,12 @@
 
 <h2>Quản lý tài khoản</h2>
 
-
 <div id="list-accounts"></div>
 
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/ListAccount/PartialAccount",
-            type: "GET",
-            success: function (data) {
-                $("#list-accounts").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
         function Paging(page) {
             $.ajax({
                 url: "/ListAccount/PartialAccount",

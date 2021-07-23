@@ -15,16 +15,7 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Category/PartialCategory",
-            type: "GET",
-            success: function (data) {
-                $("#category").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
         function Paging(page) {
             $.ajax({
                 url: "/Category/PartialCategory",

@@ -20,13 +20,13 @@ namespace GearBatOn.Controllers
             return View();
         }
 
-        public ActionResult PartialInvoice(int? page)
+        public ActionResult PartialInvoice(int? page, bool status)
         {
-           
                if (page == null) page = 1;
                int take = 10;
                int total = _dbContext.Invoices.Count();
-               List<Invoice> invoices = _dbContext.Invoices.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+               List<Invoice> invoices = _dbContext.Invoices.Where(x => x.PaymentStatus == status)
+                .OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
                foreach (var item in invoices)
                {
                     ApplicationUser customer = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.CustomerId);
@@ -34,11 +34,8 @@ namespace GearBatOn.Controllers
                 }
                 ViewBag.Paging = pg.Pagination(total, (int)page, take);
                 return PartialView("PartialInvoice", invoices);
- 
         }
       
-
-
         public ActionResult Details(int? id)
         {
             List<InvoiceDetail> invoiceDetails = _dbContext.InvoiceDetails.Where(c => c.InvoiceId == id).ToList();

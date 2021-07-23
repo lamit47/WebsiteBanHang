@@ -46,64 +46,27 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Home/PartialHomeProduct",
-            type: "GET",
-            data: { id: 2 },
-            success: function (data) {
-                $("#list-pc").append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
-        $.ajax({
-            url: "/Home/PartialHomeProduct",
-            type: "GET",
-            data: { id: 1 },
-            success: function (data) {
-                $("#list-laptop").append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
-        $.ajax({
-            url: "/Home/PartialHomeProduct",
-            type: "GET",
-            data: { id: 4 },
-            success: function (data) {
-                $("#list-monitor").append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
-        $.ajax({
-            url: "/Home/PartialHomeProduct",
-            type: "GET",
-            data: { id: 3 },
-            success: function (data) {
-                $("#list-keyboard").append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
-        $.ajax({
-            url: "/Home/PartialHomeProduct",
-            type: "GET",
-            data: { id: 3 },
-            success: function (data) {
-                $("#list-mouse").append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        getProductByCategory("list-pc", 2);
+        getProductByCategory("list-laptop", 1);
+        getProductByCategory("list-monitor", 4);
+        getProductByCategory("list-keyboard", 3);
+        getProductByCategory("list-mouse", 3);
         function showCategory(id) {
             $(".gearbaton-category").hide();
             $("#" + id).show();
+        }
+        function getProductByCategory(name, categoryId) {
+            $.ajax({
+                url: "/Home/PartialHomeProduct",
+                type: "GET",
+                data: { id: categoryId },
+                success: function (data) {
+                    $("#" + name).append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            });
         }
     </script>
 }

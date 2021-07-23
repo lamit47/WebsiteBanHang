@@ -4,22 +4,23 @@
 
 }
 
-<h2>Quản lý đơn đặt hàng</h2>
-<div id="invoice"></div>
+<div class="row g-3 card-group align-items-center">
+    <nav class="navbar navbar-light bg-light">
+        <h2>Quản lý đơn đặt hàng</h2>
+        <div class="float-right">
+            <select class="form-select" id="status">
+                <option value="true">Đã chấp nhận</option>
+                <option value="false" selected>Chưa chấp nhận</option>
+            </select>
+        </div>
+    </nav>
+    <div id="invoice"></div>
+</div>
 
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Invoice/PartialInvoice",
-            type: "GET",
-            success: function (data) {
-                $("#invoice").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
 
         $(document).on('click', '#btn-accept', function () {
             var btn = $(this);
@@ -39,11 +40,17 @@
             });
         });
 
+        $('#status').on('change', function () {
+            if ($("#status").val() != "") {
+                Paging(1);
+            }
+        });
+
         function Paging(page) {
             $.ajax({
                 url: "/Invoice/PartialInvoice",
                 type: "GET",
-                data: { page: page },
+                data: { page: page, status: $("#status").val() },
                 success: function (data) {
                     $("#invoice").empty().append(data);
                 },

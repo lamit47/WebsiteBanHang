@@ -15,16 +15,7 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Brand/PartialBrand",
-            type: "GET",
-            success: function (data) {
-                $("#brand").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-            }
-        });
+        Paging(1);
         function Paging(page) {
             $.ajax({
                 url: "/Brand/PartialBrand",
