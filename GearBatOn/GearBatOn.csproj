@@ -180,16 +180,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Admin\adController.cs" />
-    <Compile Include="Controllers\Admin\BrandController.cs" />
-    <Compile Include="Controllers\Admin\CategoryController.cs" />
+    <Compile Include="Controllers\Dash\BrandController.cs" />
+    <Compile Include="Controllers\Dash\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Admin\ImageController.cs" />
-    <Compile Include="Controllers\Admin\InvoiceController.cs" />
-    <Compile Include="Controllers\Admin\ListAccountController.cs" />
+    <Compile Include="Controllers\Dash\ImageController.cs" />
+    <Compile Include="Controllers\Dash\InvoiceController.cs" />
+    <Compile Include="Controllers\Dash\ListAccountController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\Admin\ProductController.cs" />
-    <Compile Include="Controllers\Admin\PromotionController.cs" />
+    <Compile Include="Controllers\Dash\ProductController.cs" />
+    <Compile Include="Controllers\Dash\PromotionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -343,7 +342,6 @@
     <Content Include="Views\Home\ListProduct.cshtml" />
     <Content Include="Views\Home\PartialListProduct.cshtml" />
     <Content Include="Views\ListAccount\Role.cshtml" />
-    <Content Include="Views\ad\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
