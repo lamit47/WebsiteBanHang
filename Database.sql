@@ -60,7 +60,7 @@ CREATE TABLE Product
 	Description NTEXT,
 	Price MONEY NOT NULL DEFAULT 0,
 	WarrantyPeriod INT NOT NULL DEFAULT 0,
-	InventoryAmount INT NOT NULL DEFAULT 0,
+	Inventory INT NOT NULL DEFAULT 0,
 	Status BIT NOT NULL DEFAULT 1, --False xóa
 
 	FOREIGN KEY (CountryId) REFERENCES Country(Id),
@@ -112,7 +112,7 @@ CREATE TABLE InvoiceDetails
 	Id INT IDENTITY PRIMARY KEY,
 	InvoiceId INT NOT NULL,
 	ProductId INT NOT NULL,
-	Amount INT NOT NULL default 1,
+	Quantity INT NOT NULL default 1,
 	
 	FOREIGN KEY (InvoiceId) REFERENCES Invoice(Id),
 	FOREIGN KEY (ProductId) REFERENCES Product(Id)

@@ -24,7 +24,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            var sum = item.Product.Price * item.Amount;
+            var sum = item.Product.Price * item.Quantity;
             <tr>
                 <td>
                     @i
@@ -33,7 +33,7 @@
                     @Html.DisplayFor(modelItem => item.Product.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
+                    @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product.Price)₫

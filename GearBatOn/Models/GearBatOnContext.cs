@@ -12,6 +12,7 @@ namespace GearBatOn.Models
         {
         }
 
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -25,6 +26,11 @@ namespace GearBatOn.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AspNetRole>()
+                .HasMany(e => e.AspNetUsers)
+                .WithMany(e => e.AspNetRoles)
+                .Map(m => m.ToTable("AspNetUserRoles").MapLeftKey("RoleId").MapRightKey("UserId"));
+
             modelBuilder.Entity<AspNetUser>()
                 .HasMany(e => e.Invoices)
                 .WithRequired(e => e.AspNetUser)

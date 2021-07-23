@@ -7,6 +7,7 @@
             <th scope="col">Địa chỉ email</th>
             <th scope="col">Số điện thoại</th>
             <th scope="col">Họ và tên</th>
+            <th scope="col">Quyền</th>
             <th scope="col">Sửa/Phân quyền</th>
         </tr>
     </thead>
@@ -18,6 +19,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Email)</td>
                 <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                 <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.RoleName)</td>
                 <td>
                     @Html.ActionLink("Sửa", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Phân Quyền", "Role", new { id = item.Id })

@@ -17,7 +17,7 @@
         public int ProductId { get; set; }
 
         [Required(ErrorMessage = "Số lượng không được để trống")]
-        public int Amount { get; set; }
+        public int Quantity { get; set; }
 
         public virtual Invoice Invoice { get; set; }
 

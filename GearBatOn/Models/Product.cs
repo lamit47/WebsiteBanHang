@@ -51,7 +51,7 @@
         public int WarrantyPeriod { get; set; }
 
         [Required(ErrorMessage = "Tồn kho không được để trống")]
-        public int InventoryAmount { get; set; }
+        public int Inventory { get; set; }
 
         public bool Status { get; set; }
 
