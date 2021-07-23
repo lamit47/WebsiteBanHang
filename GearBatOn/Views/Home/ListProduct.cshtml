@@ -7,6 +7,16 @@
 <div class="row g-3 card-group align-items-center">
     <nav class="navbar navbar-light bg-light">
         <h2>Danh sách sản phẩm</h2>
+        <div class="float-right">
+            <select class="form-select" id="product-sort">
+                <option value="ascending">Giá tăng dần</option>
+                <option value="descending">Giá giảm dần</option>
+                <option value="az">Từ A-Z</option>
+                <option value="za">Từ Z-A</option>
+                <option value="oldest">Cũ nhất</option>
+                <option value="latest" selected>Mới nhất</option>
+            </select>
+        </div>
     </nav>
     <div id="list-products"></div>
 </div>
@@ -14,22 +24,23 @@
 @section scripts
 {
     <script>
-        $.ajax({
-            url: "/Home/PartialListProduct",
-            type: "GET",
-            data: { id: @Html.Raw(ViewBag.categoryId) },
-            success: function (data) {
-                $("#list-products").empty().append(data);
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
+        Paging(@Html.Raw(ViewBag.Page));
+        $('#product-sort').on('change', function () {
+            if ($("#product-sort").val() != "") {
+                Paging(@Html.Raw(ViewBag.Page));
             }
         });
         function Paging(page) {
             $.ajax({
                 url: "/Home/PartialListProduct",
                 type: "GET",
-                data: { id: @Html.Raw(ViewBag.categoryId), page: page },
+                data: {
+                    id: @Html.Raw(ViewBag.categoryId),
+                    sortBy: $('#product-sort').val(),
+                    fromPrice: @Html.Raw(ViewBag.fromPrice),
+                    toPrice: @Html.Raw(ViewBag.toPrice),
+                    page: page
+                },
                 success: function (data) {
                     $("#list-products").empty().append(data);
                 },
