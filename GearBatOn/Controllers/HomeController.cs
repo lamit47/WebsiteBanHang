@@ -80,14 +80,18 @@ namespace GearBatOn.Controllers
         {
             List<Product> tempProducts;
 
-            if ((fromPrice != null && toPrice != null) && (fromPrice != 0 && toPrice != 0))
-            {
-                tempProducts = _dbContext.Products.Where(x => x.CategoryId == id && x.Status == true && (x.Price >= fromPrice && x.Price <= toPrice)).ToList();
-            } 
-            else
-            {
+            if (id != 0)
                 tempProducts = _dbContext.Products.Where(x => x.CategoryId == id && x.Status == true).ToList();
-            }
+            else
+                tempProducts = _dbContext.Products.Where(x => x.Status == true).ToList();
+
+            if (fromPrice != 0 && toPrice != 0)
+                tempProducts = tempProducts.Where(x => x.Price >= fromPrice && x.Price <= toPrice).ToList();
+            else if (fromPrice != 0 && toPrice == 0)
+                tempProducts = tempProducts.Where(x => x.Price >= fromPrice).ToList();
+            else if (fromPrice == 0 && toPrice != 0)
+                tempProducts = tempProducts.Where(x => x.Price <= toPrice).ToList();
+
             int count = tempProducts.Count();
 
             switch (sortBy)

@@ -8,6 +8,15 @@
     <nav class="navbar navbar-light bg-light">
         <h2>Danh sách sản phẩm</h2>
         <div class="float-right">
+            <select class="form-select" id="price-sort">
+                <option value="all" selected>Tất cả</option>
+                <option value="-15">Dưới 15 triệu</option>
+                <option value="15-20">Từ 15-20 triệu</option>
+                <option value="20-25">Từ 20-25 triệu</option>
+                <option value="25+">Trên 25 triệu</option>
+            </select>
+        </div>
+        <div class="float-right">
             <select class="form-select" id="product-sort">
                 <option value="ascending">Giá tăng dần</option>
                 <option value="descending">Giá giảm dần</option>
@@ -24,11 +33,33 @@
 @section scripts
 {
     <script>
+        var fromPrice = @Html.Raw(ViewBag.fromPrice);
+        var toPrice = @Html.Raw(ViewBag.toPrice);
         Paging(@Html.Raw(ViewBag.Page));
         $('#product-sort').on('change', function () {
             if ($("#product-sort").val() != "") {
                 Paging(@Html.Raw(ViewBag.Page));
             }
+        });
+        $('#price-sort').on('change', function () {
+            var priceSort = $("#price-sort").val();
+            if (priceSort == "-15") {
+                fromPrice = 0;
+                toPrice = 15000000;
+            } else if (priceSort == "15-20") {
+                fromPrice = 15000000;
+                toPrice = 20000000;
+            } else if (priceSort == "20-25") {
+                fromPrice = 15000000;
+                toPrice = 20000000;
+            } else if (priceSort == "25+") {
+                fromPrice = 25000000;
+                toPrice = 0;
+            } else {
+                fromPrice = 0;
+                toPrice = 0;
+            }
+            Paging(@Html.Raw(ViewBag.Page));
         });
         function Paging(page) {
             $.ajax({
@@ -37,8 +68,8 @@
                 data: {
                     id: @Html.Raw(ViewBag.categoryId),
                     sortBy: $('#product-sort').val(),
-                    fromPrice: @Html.Raw(ViewBag.fromPrice),
-                    toPrice: @Html.Raw(ViewBag.toPrice),
+                    fromPrice: fromPrice,
+                    toPrice: toPrice,
                     page: page
                 },
                 success: function (data) {
