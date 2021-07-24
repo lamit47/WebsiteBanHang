@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <script src="https://kit.fontawesome.com/814924e569.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header class="p-3 text-dark fixed-top" style="background-color: #e3f2fd;">
@@ -29,6 +30,8 @@
                 </form>
 
                 @Html.Partial("_LoginPartial")
+
+                @Html.Partial("~/Views/Home/Cart.cshtml")
             </div>
         </div>
     </header>

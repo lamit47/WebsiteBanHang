@@ -1,4 +1,6 @@
 ﻿using GearBatOn.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -159,6 +161,150 @@ namespace GearBatOn.Controllers
             }
 
             return (count, tempProducts);
-        } 
+        }
+
+        // Controller thêm vào giỏ hàng / thêm 1 model Item
+        public ActionResult AddToCart(int Id)
+        {
+            HttpCookie cart = new HttpCookie("cart");
+            List<Item> listCart = new List<Item>();
+            Product product = _dbContext.Products.Find(Id);
+            if (Session["cart"] == null)
+            {
+                listCart.Add(new Item() { Product = product, Quantity = 1 });
+                Session["cart"] = listCart; // lưu list item vào session "cart"
+            }
+            else
+            {
+                listCart = (List<Item>)Session["cart"];
+                int index = isExist(Id);
+                if (index != -1)
+                {
+                    listCart[index].Quantity++;
+                }
+                else
+                {
+                    listCart.Add(new Item { Product = product, Quantity = 1 });
+                }
+                Session["cart"] = listCart;
+            }
+            TempData["count"] = listCart.Count();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult RemoveFromCart(int Id)
+        {
+            List<Item> listCart = (List<Item>)Session["cart"];
+            int index = isExist(Id);
+            listCart.RemoveAt(index);
+            Session["cart"] = listCart;
+            return RedirectToAction("Index");
+        }
+
+        private int isExist(int id) // xét item đã có trong sesion chưa?
+        {
+            List<Item> listCart = (List<Item>)Session["cart"];
+            for (int i = 0; i < listCart.Count; i++)
+            {
+                if (listCart[i].Product.Id.Equals(id))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        public ActionResult CheckOut()
+        {
+            Invoice invoice = new Invoice();
+            invoice.countries = _dbContext.Countries.ToList();
+            invoice.provinces = _dbContext.Provinces.ToList();
+            invoice.promotions = _dbContext.Promotions.ToList();
+
+            return View(invoice);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckOut(Invoice invoice)
+        {
+            ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            invoice.CustomerId = user.Id;   // gan id theo id khach hang dang nhap
+            invoice.Date = DateTime.Now; // lay ngay gio hien tai
+
+            //lưu vào invoicedetail
+            List<Item> listCart = (List<Item>)Session["cart"];
+            foreach (var item in listCart)
+            {
+                InvoiceDetail invoiceDetail = new InvoiceDetail();
+                invoiceDetail.ProductId = item.Product.Id;
+                invoiceDetail.Quantity = item.Quantity;
+                invoiceDetail.InvoiceId = invoice.Id;
+                _dbContext.InvoiceDetails.Add(invoiceDetail);
+            }
+
+            _dbContext.Invoices.Add(invoice);
+            _dbContext.SaveChanges();
+            Session.Clear();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult RemoveFromCheckOut(int Id)
+        {
+            List<Item> listCart = (List<Item>)Session["cart"];
+            int index = isExist(Id);
+            listCart.RemoveAt(index);
+            Session["cart"] = listCart;
+            return RedirectToAction("CheckOut");
+        }
+
+        public ActionResult Plus(int Id)
+        {
+            List<Item> listCart = (List<Item>)Session["cart"];
+            int index = isExist(Id);
+            if (index != -1)
+            {
+                listCart[index].Quantity++;
+            }
+            Session["cart"] = listCart;
+            return RedirectToAction("CheckOut");
+        }
+
+        public ActionResult Minus(int Id)
+        {
+            List<Item> listCart = (List<Item>)Session["cart"];
+            int index = isExist(Id);
+            if (index != -1)
+            {
+                if (listCart[index].Quantity != 1)
+                {
+                    listCart[index].Quantity--;
+                }
+                else
+                {
+                    listCart.RemoveAt(index);
+                }
+            }
+
+            Session["cart"] = listCart;
+            return RedirectToAction("CheckOut");
+        }
+
+        public ActionResult CheckPromoCode(FormCollection collection)
+        {
+            List<Promotion> promotions = _dbContext.Promotions.ToList();
+            string codeinput = collection.Get("codeinput");
+            foreach (var item in promotions)
+            {
+                if (codeinput == item.PromoCode)
+                {
+                    ViewBag.ratio = item.Ratio;
+                }
+            }
+
+            return RedirectToAction("CheckOut");
+        }
     }
 }

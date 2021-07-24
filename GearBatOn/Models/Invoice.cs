@@ -9,6 +9,9 @@
     [Table("Invoice")]
     public partial class Invoice
     {
+        public List<Province> provinces = new List<Province>();
+        public List<Country> countries = new List<Country>();
+        public List<Promotion> promotions = new List<Promotion>();
         public string NameCustomer;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

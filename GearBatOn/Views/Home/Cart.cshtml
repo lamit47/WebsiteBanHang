@@ -1,0 +1,77 @@
+﻿@using GearBatOn.Models;
+@{  
+    List<Item> items = (List<Item>)Session["cart"];
+    int i = 0; 
+}
+
+
+<div style="margin-left: 13px" class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuClickableInside"
+            data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <i class="fa fa-shopping-cart"></i> &nbsp;
+        <span class="badge bg-light text-dark">
+            @*Hiển thị sô sản phẩm trong giỏ*@
+            @if ((List<Item>)Session["cart"] != null)
+            {
+                foreach (var Item in (List<Item>)Session["cart"])
+                {
+                    i = i + Item.Quantity;
+                }
+            }
+            @i
+        </span>
+    </button>
+    <ul style="min-width: 350px" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li class="overflow-auto">
+            @if ((List<Item>)Session["cart"] != null)
+            {
+                foreach (var Item in (List<Item>)Session["cart"])
+                {
+                    <div class="dropdown-item" href="#">
+                        <a class="btn btn-outline-dark" href="@Url.Action(" RemoveFromCart", "Home" , new {
+                                    Id=Item.Product.Id })">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        &nbsp;
+                        @Item.Product.Name &nbsp; <b style="margin-right: 8px">x @Item.Quantity</b>
+                    </div> }
+            }
+            else
+            {
+                <span style="color: red ; margin-left: 14px">Giỏ hàng đang trống ! Hihi</span>//bugggg
+            }
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li>
+            <div style="margin-left: 14px">
+                <strong>$</strong>
+                <b style="color: gray">
+                    @if ((List<Item>)Session["cart"] != null)
+                    {
+                        int c = 0;
+                        int a, b;
+                        foreach (var Item in (List<Item>)Session["cart"])
+                        {
+                            a = Convert.ToInt32(Item.Product.Price);
+                            b = Item.Quantity;
+                            c = c + a * b;
+                        }
+                        string s = string.Format("{0:#,##0.00}", c);
+                        @s
+                    }
+                </b><strong>VND</strong>
+                <button style="margin-right: 8px" type="button" class="pull-right btn btn-dark" onclick="location.href='@Url.Action(" CheckOut", "Home" )'">
+                    Đặt hàng
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+@section scripts
+{
+    <script>
+    </script>
+} 

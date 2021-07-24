@@ -203,6 +203,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceDetail.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Paging.cs" />
     <Compile Include="Models\Product.cs" />
@@ -345,6 +346,8 @@
     <Content Include="Views\Home\PartialListCategory.cshtml" />
     <Content Include="Views\Home\PartialListBrand.cshtml" />
     <Content Include="Views\Shared\_StaffLayout.cshtml" />
+    <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<GearBatOn.Models.Product>
 
-
 <div class="row row-cols-1 row-cols-md-5 g-4">
     @foreach (var item in Model)
     {
@@ -12,6 +11,14 @@
                         @Html.ActionLink(item.Name, "Product", "Home", new { id = item.Id }, htmlAttributes: new { @class = "stretched-link text-dark", @style = "text-decoration: none;" })
                     </h6>
                     <p class="card-text text-danger">@Html.DisplayFor(modelItem => item.Price)₫</p>
+                </div>
+
+                @* button them vao gio hang *@
+                <div class="pull-right">
+                    @using (Html.BeginForm("AddToCart", "Home", new { Id = item.Id }, FormMethod.Post))
+                    {
+                        <button type="submit" class="pull-right"><i class="fa fa-cart-plus"></i></button> @*icon thêm vào giỏ hàng *@
+                    }
                 </div>
             </div>
         </div>
