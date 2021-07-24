@@ -31,7 +31,9 @@
 
                 @Html.Partial("_LoginPartial")
 
-                @Html.Partial("~/Views/Home/Cart.cshtml")
+                <div id="cart">
+                    @Html.Partial("~/Views/Home/Cart.cshtml")
+                </div>
             </div>
         </div>
     </header>
@@ -68,6 +70,27 @@
                 alert(xhr.responseText);
             }
         });
+
+        function RemoveFromCart(id) {
+            $.ajax({
+                url: "/Home/RemoveFromCart",
+                type: "POST",
+                data: { Id: id},
+                success: function (data) {
+                    ReloadCart();
+                }
+            });
+        }
+
+        function ReloadCart() {
+            $.ajax({
+                url: "/Home/Cart",
+                type: "GET",
+                success: function (data) {
+                    $("#cart").empty().append(data);
+                }
+            });
+        }
     </script>
 </body>
 </html>

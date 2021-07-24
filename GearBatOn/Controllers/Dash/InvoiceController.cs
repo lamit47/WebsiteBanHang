@@ -52,7 +52,6 @@ namespace GearBatOn.Controllers
             {
                 status = invoice.PaymentStatus
             });
-            
         }
     }
     

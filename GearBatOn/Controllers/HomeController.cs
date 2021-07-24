@@ -164,13 +164,15 @@ namespace GearBatOn.Controllers
         }
 
         // Controller thêm vào giỏ hàng / thêm 1 model Item
-        public ActionResult AddToCart(int Id)
+        [HttpPost]
+        public JsonResult AddToCart(int Id)
         {
             Product product = _dbContext.Products.Find(Id);
             List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
 
             if (product != null)
             {
+                product.FeatureImage = _dbContext.Images.Where(x => x.ProductId == product.Id).First().ImagePath;
                 Item item = listCart.Find(x => x.Product.Id == product.Id);
                 if (item == null)
                 {
@@ -188,10 +190,11 @@ namespace GearBatOn.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return Json(new { status = true });
         }
 
-        public ActionResult RemoveFromCart(int Id)
+        [HttpPost]
+        public JsonResult RemoveFromCart(int Id)
         {
             List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
             Item item = listCart.Find(x => x.Product.Id == Id);
@@ -200,7 +203,8 @@ namespace GearBatOn.Controllers
                 listCart.RemoveAll(x => x.Product.Id == item.Product.Id);
                 Session["cart"] = listCart;
             }
-            return RedirectToAction("Index");
+
+            return Json(new { status = true });
         }
 
         public ActionResult CheckOut()
@@ -220,8 +224,15 @@ namespace GearBatOn.Controllers
         {
             ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
                 .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-            invoice.CustomerId = user.Id;   // gan id theo id khach hang dang nhap
-            invoice.Date = DateTime.Now; // lay ngay gio hien tai
+            invoice.CustomerId = user.Id;
+            invoice.Date = DateTime.Now;
+            invoice.PaymentStatus = false;
+
+            Promotion promotion = _dbContext.Promotions.First(x => x.Id == invoice.Id && x.Status == true);
+            if (promotion == null)
+            {
+                invoice.PromotionId = null;
+            }
 
             //lưu vào invoicedetail
             List<Item> listCart = (List<Item>)Session["cart"];
@@ -241,19 +252,8 @@ namespace GearBatOn.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult RemoveFromCheckOut(int Id)
-        {
-            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
-            Item item = listCart.Find(x => x.Product.Id == Id);
-            if (item != null)
-            {
-                listCart.RemoveAll(x => x.Product.Id == item.Product.Id);
-                Session["cart"] = listCart;
-            }
-            return RedirectToAction("CheckOut");
-        }
-
-        public ActionResult Plus(int Id)
+        [HttpPost]
+        public JsonResult Plus(int Id)
         {
             List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
             Item item = listCart.Find(x => x.Product.Id == Id);
@@ -268,10 +268,11 @@ namespace GearBatOn.Controllers
                 });
                 Session["cart"] = listCart;
             }
-            return RedirectToAction("CheckOut");
+            return Json(new { status = true });
         }
 
-        public ActionResult Minus(int Id)
+        [HttpPost]
+        public JsonResult Minus(int Id)
         {
             List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
             Item item = listCart.Find(x => x.Product.Id == Id);
@@ -294,22 +295,29 @@ namespace GearBatOn.Controllers
                 }
                 Session["cart"] = listCart;
             }
-            return RedirectToAction("CheckOut");
+            return Json(new { status = true });
         }
 
-        public ActionResult CheckPromoCode(FormCollection collection)
+        [HttpPost]
+        public JsonResult CheckPromoCode(string code)
         {
-            List<Promotion> promotions = _dbContext.Promotions.ToList();
-            string codeinput = collection.Get("codeinput");
-            foreach (var item in promotions)
+            Promotion promotion = _dbContext.Promotions.First(x => x.PromoCode == code && x.Status == true);
+
+            if (code != null)
             {
-                if (codeinput == item.PromoCode)
-                {
-                    ViewBag.ratio = item.Ratio;
-                }
+                return Json(new { 
+                    status = true,
+                    promoId = promotion.Id,
+                    ratio = promotion.Ratio
+                });
             }
 
-            return RedirectToAction("CheckOut");
+            return Json(new { status = false });
+        }
+
+        public ActionResult Cart()
+        {
+            return PartialView("Cart");
         }
     }
 }

@@ -2,11 +2,11 @@
 @using GearBatOn.Models
 
 @{
-    ViewBag.Title = "CheckOut";
+    ViewBag.Title = "Đặt hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     int number = 1;
-    List<Item> items = new List<Item>();
-    items = (List<Item>)Session["cart"]; //ép kiểu về list
+    List<Item> items = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+    decimal total = 0;
 }
 
 <h2 style="text-align: center">Giỏ Hàng</h2>
@@ -17,208 +17,178 @@
     {
         <div style="text-align: center">
             <div>Không có sản phẩm nào trong giỏ hàng!</div>
-            <a style="text-decoration: none" href="@Url.Action("Index", "Home")"><i class="fa fa-reply"></i>Tiếp tục mua hàng</a>
+            <div style="height: 50px;"></div>
+            <a style="text-decoration: none" href="@Url.Action("Index", "Home")"><i class="fa fa-reply"></i> Tiếp tục mua hàng</a>
         </div>
     }
     else
     {
-        using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Hình ảnh</th>
+                    <th scope="col">Tên sản phẩm</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Giá tiền</th>
+                    <th scope="col">Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in items)
+                {
+                    var sum = item.Product.Price * item.Quantity;
+                    <tr>
+                        <th scope="row">@number</th>
+                        <td>
+                            <img src="@Url.Content(item.Product.FeatureImage ?? "~/Images/empty-image.png")" class="card-img-top" style="width: 70px; height: 70px; object-fit: cover;">
+                        </td>
+                        <td> @item.Product.Name </td>
+                        <td>
+                            <a onclick="minusItem(@item.Product.Id)">
+                                <i class="fa fa-minus-square-o" aria-hidden="true"></i>
+                            </a>
+                            <span class="badge bg-secondary">@item.Quantity</span>
+                            <a onclick="plusItem(@item.Product.Id)">
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        <td>
+                            @string.Format("{0:n}", item.Product.Price)
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-dark"  onclick="RemoveFromCart(@item.Product.Id); location.reload();">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
 
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    number++;
+                    total = total + sum;
+                }
+                <tr>
+                    <th scope="row">@number</th>
+                    <td colspan="3" class="table-active">Tạm tính</td>
+                    <td colspan="2">@string.Format("{0:n}", @total)₫</td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
 
+        <div class="row">
+            <div class="col-8">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.PaymentStatus)
+                        @Html.HiddenFor(model => model.PromotionId)
+                        <input type="hidden" id="total" value="@total">
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Hình ảnh</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Số lượng</th>
-                            <th>Giá tiền</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var item in items)
-                    {
-                        <tr>
-                            <th scope="row">@number</th>
-                            <td>
-                                <img src="@Url.Content(item.Product.FeatureImage ?? "~/Images/empty-image.png")" class="card-img-top" style="width: 230px; height: 230px; object-fit: cover;">
-                            </td>
-                            <td> @item.Product.Name </td>
-                            <td>
-                                <a href="@Url.Action("Minus","Home", new { Id = item.Product.Id })">
-                                    <i class="fa fa-minus-square-o" aria-hidden="true"></i>
-                                </a>
-                                <span class="badge bg-secondary">@item.Quantity</span>
-                                <a href="@Url.Action("Plus","Home", new { Id = item.Product.Id })">
-                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                            <td> @item.Product.Price </td>
-                            <td>
-                                <a class="btn btn-outline-dark" href="@Url.Action("RemoveFromCheckOut", "Home", new { Id = item.Product.Id })">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        number++;
-                    }
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
+                        <div class="input-group">
+                            <label class="col-sm-2 col-form-label" style="float: left; text-align: left;">Quốc gia</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("CountryId", new SelectList(Model.countries, "Id", "Name"), htmlAttributes: new { @class = "form-select" })
+                                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="col-sm-2 col-form-label">Tỉnh/Thành phố</label>
+                            <div class="col-sm-10">
+                                @Html.DropDownList("ProvinceId", new SelectList(Model.provinces, "Id", "Name"), htmlAttributes: new { @class = "form-select" })
+                                @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="col-sm-2 col-form-label">Địa chỉ chi tiết</label>
+                            <div class="col-sm-10">
+                                @Html.TextAreaFor(model => model.Address, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="col-sm-2 col-form-label">Mã giảm giá</label>
+                            <div id="Ratio" class="col-sm-10">
+                                <input class="form-control" type="text" id="promo-code">
+                            </div>
+                        </div>
 
-
-
-                <table class="table table-borderless">
-                    <thead>
-
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="pull-right">
-                                Tạm tính : &nbsp;
-                                @if (Session["cart"] != null)
-                                {
-                                    int c = 0;
-                                    int a, b;
-                                    foreach (var Item in items)
-                                    {
-                                        a = Convert.ToInt32(Item.Product.Price);
-                                        b = Item.Quantity;
-                                        c = c + a * b;
-                                    }
-                                    string s = string.Format("{0:#,##0.00}", c);
-                                    @s
-                                }
-                                &nbsp;VND
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Quốc gia :</th>
-                            <th>Tỉnh :</th>
-                            <th>Địa chỉ chi tiết :</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        <tr>
-                            <th>Địa chỉ giao hàng :&nbsp;</th>
-                            <th>
-                                <div class="form-group">
-                                    <div style="width: 140px" class="col-md-10">
-                                        @Html.DropDownList("CountryId", new SelectList(Model.countries, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </th>
-                            <td>
-                                <div class="form-group">
-                                    <div style="width: 140px" class="col-md-10">
-                                        @Html.DropDownList("ProvinceId", new SelectList(Model.provinces, "Id", "Name"), htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <div class="col-md-10">
-                                        @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <div id="Ratio" class="col-md-10">
-                                        @Html.DropDownList("PromotionId", new SelectList(Model.promotions, "Id", "PromoCode"), htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.PromotionId, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot></tfoot>
-                </table>
-
-                <table class="table table-borderless">
-                    <tbody>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="pull-right">Giảm :&nbsp; 
-                                @*<span id="ratio"></span>*@           @* HIển thị giảm giá *@
-                                VND
-                            </th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="pull-right"><h3>Tổng tiền : &nbsp;
-                                @* Hiển thị tổng tiền phải trả *@
-                                VND
-                                </h3>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th class="pull-right" >
-                                <div class="form-group">
-                                    <div class="col-md-10">
-                                        <div style="width: 170px" class="checkbox">
-                                            Thanh toán online &nbsp                                  
-                                            @Html.EditorFor(model => model.PaymentStatus)
-                                            @Html.ValidationMessageFor(model => model.PaymentStatus, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="pull-right form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Thanh toán" class="btn btn-success" />
+                        <br />
+                        <div class="input-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-primary" onclick="getPromo()">Áp dụng mã giảm giá</button>
+                                <input type="submit" value="Thanh toán" class="btn btn-success" />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
-        }
-        <br /><br /><br />
+            <div class="col-4">
+                <dl class="row">
+                    <dt class="col-sm-4">Giảm giá:</dt>
+                    <dd class="col-sm-8" id="giamGia">0VND</dd>
+
+                    <dt class="col-sm-4"><h4>Thành tiền:</h4></dt>
+                    <dd class="col-sm-8" id="thanhTien">0VND</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div style="height: 50px;"></div>
         <div style="text-align: center">
-            <a style="text-decoration: none" href="@Url.Action("Index", "Home")"><i class="fa fa-reply"></i>Tiếp tục mua hàng</a>
+            <a style="text-decoration: none" href="@Url.Action("Index", "Home")"><i class="fa fa-reply"></i> Tiếp tục mua hàng</a>
         </div>
     }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var total = $("#total").val();
+        $("#thanhTien").empty().append("<h4>" + parseInt(total).toLocaleString() + " VND</h4>");
+
+        function getPromo() {
+            var code = $("#promo-code").val();
+            $.ajax({
+                url: "/Home/CheckPromoCode",
+                type: "POST",
+                data: { code: code },
+                success: function (data) {
+                    if (data.status == true) {
+                        var giamGia = total * data.ratio / 100;
+                        $("#giamGia").empty().append(parseInt(giamGia).toLocaleString() + " VND");
+                        $("#thanhTien").empty().append("<h4>" + parseInt(total - giamGia).toLocaleString() + " VND</h4>");
+                        $("#PromotionId").val(data.promoId);
+                    }
+                }
+            });
+        }
+
+        function plusItem(id) {
+            $.ajax({
+                url: "/Home/Plus",
+                type: "POST",
+                data: { Id: id },
+                success: function (data) {
+                    if (data.status == true) {
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+        function minusItem(id) {
+            $.ajax({
+                url: "/Home/Minus",
+                type: "POST",
+                data: { Id: id },
+                success: function (data) {
+                    if (data.status == true) {
+                        location.reload();
+                    }
+                }
+            });
+        }
+    </script>
 }

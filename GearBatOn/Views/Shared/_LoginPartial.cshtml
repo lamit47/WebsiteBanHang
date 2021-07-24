@@ -14,7 +14,7 @@
                 <li>
                     @if (User.IsInRole("Administrator") || User.IsInRole("Manager") || User.IsInRole("Employee"))
                     {
-                        @Html.ActionLink("Quản lý website", "Index", "Dash", routeValues: null, htmlAttributes: new { title = "Quản lý", @class = "dropdown-item" })
+                        @Html.ActionLink("Quản lý website", "Index", "Invoice", routeValues: null, htmlAttributes: new { title = "Quản lý", @class = "dropdown-item" })
                     }
                 </li>
                 <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Đổi mật khẩu", @class = "dropdown-item" })</li>
@@ -30,6 +30,6 @@ else
 {
 <div class="text-end">
     @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-outline-light me-2", type = "button" })
-    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-warning", type = "button" })
+    @Html.ActionLink("Đăng ký", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-outline-warning", type = "button" })
 </div>
 }

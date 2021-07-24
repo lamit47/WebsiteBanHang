@@ -23,7 +23,7 @@
             <li class="dropdown-item">
                 <p>
                     <span class="name-car align-middle">@item.Product.Name</span><b>&nbsp;x @item.Quantity</b>
-                    <a class="btn btn-sm btn-outline-dark" href="/Home/RemoveFromCart/@item.Product.Id"><i class="fa fa-trash align-middle"></i></a>
+                    <a class="btn btn-sm btn-outline-dark" onclick="RemoveFromCart(@item.Product.Id)"><i class="fa fa-trash align-middle"></i></a>
                 </p>
             </li>
         }
