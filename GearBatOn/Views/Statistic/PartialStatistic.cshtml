@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GearBatOn.Models.Product>
+
+<h3 class="text-center">Tổng doanh thu: @string.Format("{0:n}", ViewBag.total)VNĐ</h3>
+
+<h4>Top 10 sản phẩm bán chạy nhất</h4>
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">Mã</th>
+            <th scope="col">Hình ảnh</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Danh mục</th>
+            <th scope="col">Sản xuất</th>
+            <th scope="col">Hãng</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Tồn kho</th>
+            <th scope="col">Tổng số lượng bán</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td><img src="@Url.Content(item.FeatureImage ?? "~/Images/empty-image.png")" height="150" width="150" /></td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Brand.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>@Html.DisplayFor(modelItem => item.Inventory)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalSeller)</td>
+            </tr>
+        }
+    </tbody>
+</table>

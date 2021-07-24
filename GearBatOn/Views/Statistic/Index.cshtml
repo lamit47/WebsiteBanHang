@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Thống kê";
+    Layout = "~/Views/Shared/_StaffLayout.cshtml";
+}
+
+<div>
+    <h2>Thống kê theo: </h2>
+    <select class="form-select" id="type">
+        <option value="week" selected>Tuần</option>
+        <option value="month">Tháng</option>
+        <option value="quarterly">Quý</option>
+        <option value="year">Năm</option>
+    </select>
+</div>
+<div id="best-seller"></div>
+
+@section scripts
+{
+    <script>
+        getBestSeller("week");
+        $('#type').on('change', function () {
+            if ($("#type").val() != "") {
+                getBestSeller($("#type").val());
+            }
+        });
+        function getBestSeller(type) {
+            $.ajax({
+                url: "/Statistic/PartialStatistic",
+                type: "GET",
+                data: { type: type },
+                success: function (data) {
+                    $("#best-seller").empty().append(data);
+                }
+            })
+        }
+    </script>
+}

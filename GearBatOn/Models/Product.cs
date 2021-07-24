@@ -15,6 +15,7 @@
         public List<Brand> ListBrand = new List<Brand>();
         public List<Image> ListImage = new List<Image>();
         public string FeatureImage;
+        public int TotalSeller;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()

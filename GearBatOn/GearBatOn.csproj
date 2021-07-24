@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Dash\BrandController.cs" />
     <Compile Include="Controllers\Dash\CategoryController.cs" />
+    <Compile Include="Controllers\Dash\StatisticController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Dash\ImageController.cs" />
     <Compile Include="Controllers\Dash\InvoiceController.cs" />
@@ -351,6 +352,8 @@
     <Content Include="Views\Home\MyOrder.cshtml" />
     <Content Include="Views\Home\MyOderDetails.cshtml" />
     <Content Include="Views\Home\PartialMyOrder.cshtml" />
+    <Content Include="Views\Statistic\Index.cshtml" />
+    <Content Include="Views\Statistic\PartialStatistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

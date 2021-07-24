@@ -31,7 +31,7 @@
                     <li>
                         @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
                         {
-                            @Html.ActionLink("Thống kê", "Index", "Brand", new { area = "" }, new { @class = "nav-link px-2 text-dark" })
+                            @Html.ActionLink("Thống kê", "Index", "Statistic", new { area = "" }, new { @class = "nav-link px-2 text-dark" })
                         }
                     </li>
                     <li>
