@@ -56,6 +56,14 @@ main {
     -webkit-box-orient: vertical;
 }
 
+.name-car {
+    display: inline-block;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
 #megamenu a {
     text-decoration: none;
     color: black;

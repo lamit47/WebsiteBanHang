@@ -166,52 +166,41 @@ namespace GearBatOn.Controllers
         // Controller thêm vào giỏ hàng / thêm 1 model Item
         public ActionResult AddToCart(int Id)
         {
-            HttpCookie cart = new HttpCookie("cart");
-            List<Item> listCart = new List<Item>();
             Product product = _dbContext.Products.Find(Id);
-            if (Session["cart"] == null)
+            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+
+            if (product != null)
             {
-                listCart.Add(new Item() { Product = product, Quantity = 1 });
-                Session["cart"] = listCart; // lưu list item vào session "cart"
-            }
-            else
-            {
-                listCart = (List<Item>)Session["cart"];
-                int index = isExist(Id);
-                if (index != -1)
+                Item item = listCart.Find(x => x.Product.Id == product.Id);
+                if (item == null)
                 {
-                    listCart[index].Quantity++;
+                    listCart.Add(new Item() { Product = product, Quantity = 1 });
+                    Session["cart"] = listCart; // lưu list item vào session "cart"
                 }
                 else
                 {
-                    listCart.Add(new Item { Product = product, Quantity = 1 });
+                    listCart.ForEach(x => {
+                        if (x.Product.Id == item.Product.Id)
+                        {
+                            x.Quantity++;
+                        }
+                    });
                 }
-                Session["cart"] = listCart;
             }
-            TempData["count"] = listCart.Count();
+
             return RedirectToAction("Index");
         }
 
         public ActionResult RemoveFromCart(int Id)
         {
-            List<Item> listCart = (List<Item>)Session["cart"];
-            int index = isExist(Id);
-            listCart.RemoveAt(index);
-            Session["cart"] = listCart;
-            return RedirectToAction("Index");
-        }
-
-        private int isExist(int id) // xét item đã có trong sesion chưa?
-        {
-            List<Item> listCart = (List<Item>)Session["cart"];
-            for (int i = 0; i < listCart.Count; i++)
+            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+            Item item = listCart.Find(x => x.Product.Id == Id);
+            if (item != null)
             {
-                if (listCart[i].Product.Id.Equals(id))
-                {
-                    return i;
-                }
+                listCart.RemoveAll(x => x.Product.Id == item.Product.Id);
+                Session["cart"] = listCart;
             }
-            return -1;
+            return RedirectToAction("Index");
         }
 
         public ActionResult CheckOut()
@@ -253,42 +242,57 @@ namespace GearBatOn.Controllers
 
         public ActionResult RemoveFromCheckOut(int Id)
         {
-            List<Item> listCart = (List<Item>)Session["cart"];
-            int index = isExist(Id);
-            listCart.RemoveAt(index);
-            Session["cart"] = listCart;
+            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+            Item item = listCart.Find(x => x.Product.Id == Id);
+            if (item != null)
+            {
+                listCart.RemoveAll(x => x.Product.Id == item.Product.Id);
+                Session["cart"] = listCart;
+            }
             return RedirectToAction("CheckOut");
         }
 
         public ActionResult Plus(int Id)
         {
-            List<Item> listCart = (List<Item>)Session["cart"];
-            int index = isExist(Id);
-            if (index != -1)
+            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+            Item item = listCart.Find(x => x.Product.Id == Id);
+            if (item != null)
             {
-                listCart[index].Quantity++;
+                listCart.ForEach(x =>
+                {
+                    if (x.Product.Id == item.Product.Id)
+                    {
+                        x.Quantity++;
+                    }
+                });
+                Session["cart"] = listCart;
             }
-            Session["cart"] = listCart;
             return RedirectToAction("CheckOut");
         }
 
         public ActionResult Minus(int Id)
         {
-            List<Item> listCart = (List<Item>)Session["cart"];
-            int index = isExist(Id);
-            if (index != -1)
+            List<Item> listCart = (Session["cart"] == null) ? new List<Item>() : (List<Item>)Session["cart"];
+            Item item = listCart.Find(x => x.Product.Id == Id);
+            if (item != null)
             {
-                if (listCart[index].Quantity != 1)
+                if (item.Quantity > 1)
                 {
-                    listCart[index].Quantity--;
+
+                    listCart.ForEach(x =>
+                    {
+                        if (x.Product.Id == item.Product.Id)
+                        {
+                            x.Quantity--;
+                        }
+                    });
                 }
                 else
                 {
-                    listCart.RemoveAt(index);
+                    listCart.RemoveAll(x => x.Product.Id == item.Product.Id);
                 }
+                Session["cart"] = listCart;
             }
-
-            Session["cart"] = listCart;
             return RedirectToAction("CheckOut");
         }
 
