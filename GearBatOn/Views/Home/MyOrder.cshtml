@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Đơn hàng của tôi";
+}
+
+<h2>Đơn hàng của tôi</h2>
+
+<div id="invoice"></div>
+
+@section scripts
+{
+    <script>
+        Paging(1);
+
+        function Paging(page) {
+            $.ajax({
+                url: "/Home/PartialMyOrder",
+                type: "GET",
+                data: { page: page, status: $("#status").val() },
+                success: function (data) {
+                    $("#invoice").empty().append(data);
+                },
+                error: function (xhr, status, error) {
+                    alert(xhr.responseText);
+                }
+            })
+        }
+    </script>
+
+}

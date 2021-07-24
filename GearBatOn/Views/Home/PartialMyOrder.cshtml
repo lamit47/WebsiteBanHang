@@ -1,0 +1,40 @@
+﻿@model IEnumerable<GearBatOn.Models.Invoice>
+
+
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">Mã</th>
+            <th scope="col">Mã khuyến mãi</th>
+            <th scope="col">Tên khách hàng</th>
+            <th scope="col">Ngày và giờ đặt hàng</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Nước</th>
+            <th scope="col">Tỉnh/Thành phố</th>
+            <th scope="col">Trang thái đơn hàng</th>
+            <th scope="col">Xem chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                <td>
+                    @(item.PromotionId == null ? @Html.Raw("Không có") : @Html.DisplayFor(modelItem => item.Promotion.Name))
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.NameCustomer)</td>
+                <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Country.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Province.Name)</td>
+                <td>@(item.PaymentStatus ? "Đã chấp nhận" : "Chưa chấp nhận")</td>
+                <td>@Html.ActionLink("Chi tiết", "MyOderDetails", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.Raw(ViewBag.Paging)
+

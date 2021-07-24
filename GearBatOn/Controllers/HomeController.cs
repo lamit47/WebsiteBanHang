@@ -319,5 +319,34 @@ namespace GearBatOn.Controllers
         {
             return PartialView("Cart");
         }
+
+        public ActionResult MyOrder()
+        {
+            return View();
+        }
+
+        public ActionResult PartialMyOrder(int? page)
+        {
+            if (page == null) page = 1;
+            int take = 10;
+            int total = _dbContext.Invoices.Count();
+            List<Invoice> invoices = _dbContext.Invoices.OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
+            foreach (var item in invoices)
+            {
+                ApplicationUser customer = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(item.CustomerId);
+                item.NameCustomer = customer.FullName;
+            }
+
+            ViewBag.Paging = pg.Pagination(total, (int)page, take);
+            return PartialView("PartialMyOrder", invoices);
+        }
+
+        public ActionResult MyOderDetails(int? id)
+        {
+            Invoice temp = _dbContext.Invoices.First(x => x.Id == id);
+            List<InvoiceDetail> invoiceDetails = _dbContext.InvoiceDetails.Where(c => c.InvoiceId == id).ToList();
+            ViewBag.ratio = (temp.PromotionId == null) ? 0 : temp.Promotion.Ratio;
+            return View(invoiceDetails);
+        }
     }
 }

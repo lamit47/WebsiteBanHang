@@ -348,6 +348,9 @@
     <Content Include="Views\Shared\_StaffLayout.cshtml" />
     <Content Include="Views\Home\CheckOut.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\MyOrder.cshtml" />
+    <Content Include="Views\Home\MyOderDetails.cshtml" />
+    <Content Include="Views\Home\PartialMyOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

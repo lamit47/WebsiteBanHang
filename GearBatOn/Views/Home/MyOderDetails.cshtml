@@ -1,0 +1,61 @@
+﻿@model IEnumerable<GearBatOn.Models.InvoiceDetail>
+
+@{
+    ViewBag.Title = "Chi tiết đơn đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+    decimal t = 0;
+    decimal ratio = (decimal)ViewBag.ratio;
+}
+
+<h2>Chi tiết đơn đặt hàng</h2>
+
+
+<table class="table table-bordered border-primary">
+    <thead>
+        <tr>
+            <th scope="col">STT</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Đơn giá</th>
+            <th scope="col">Tổng tiền</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var sum = item.Product.Price * item.Quantity;
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price)₫
+                </td>
+                <td>
+                    @string.Format("{0:n}", @sum)₫
+                    @{i++; t = t + sum;}
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="table-active">Tạm tính</td>
+            <td>@string.Format("{0:n}", @t)₫</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="table-active">Khuyến mãi</td>
+            <td>@string.Format("{0:n}", (@t*@ratio/100))₫</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="table-active">Thành tiền</td>
+            <td>@string.Format("{0:n}", @t- (@t * @ratio / 100))₫</td>
+        </tr>
+    </tbody>
+</table>
