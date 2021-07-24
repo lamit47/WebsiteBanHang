@@ -236,6 +236,7 @@ namespace GearBatOn.Controllers
 
             _dbContext.Invoices.Add(invoice);
             _dbContext.SaveChanges();
+
             Session.Clear();
             return RedirectToAction("Index");
         }

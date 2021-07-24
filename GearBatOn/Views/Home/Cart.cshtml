@@ -9,39 +9,36 @@
 }
 
 
-    <div style="margin-left: 13px" class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-            <i class="fa fa-shopping-cart"></i> &nbsp;
-            <span class="badge bg-light text-dark">
-                @*Hiển thị sô sản phẩm trong giỏ*@
-                @count
-            </span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-end">
-            @foreach (var item in items)
-            {
-                <li class="dropdown-item">
-                    <p>
-                        <span class="name-car align-middle">@item.Product.Name</span><b>&nbsp;x @item.Quantity</b>
-                        <a class="btn btn-sm btn-outline-dark" href="/Home/RemoveFromCart/@item.Product.Id"><i class="fa fa-trash align-middle"></i></a>
-                    </p>
-                </li>
-            }
-            @if (count == 0)
-            {
-                <li class="dropdown-item">
-                    <span style="color: red ; margin-left: 14px">Giỏ hàng đang trống ! Hihi</span>
-                </li>
-            }
+<div style="margin-left: 13px" class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <i class="fa fa-shopping-cart"></i> &nbsp;
+        <span class="badge bg-light text-dark">
+            @*Hiển thị sô sản phẩm trong giỏ*@
+            @count
+        </span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        @foreach (var item in items)
+        {
+            <li class="dropdown-item">
+                <p>
+                    <span class="name-car align-middle">@item.Product.Name</span><b>&nbsp;x @item.Quantity</b>
+                    <a class="btn btn-sm btn-outline-dark" href="/Home/RemoveFromCart/@item.Product.Id"><i class="fa fa-trash align-middle"></i></a>
+                </p>
+            </li>
+        }
+        @if (count == 0)
+        {
+            <li class="dropdown-item">
+                <span class="text-danger">Giỏ hàng đang trống ! Hihi</span>
+            </li>
+        }
+        else
+        {
             <li class="dropdown-item">
                 <b style="color: gray">@totalPrice</b><strong>₫</strong>&nbsp;
                 <button class="btn btn-sm btn-dark" onclick="location.href='@Url.Action("CheckOut", "Home")'">Đặt hàng</button>
             </li>
-        </ul>
-    </div>
-
-@section scripts
-{
-    <script>
-    </script>
-}
+        }
+    </ul>
+</div>
