@@ -38,7 +38,7 @@ namespace GearBatOn.Controllers
             return PartialView("PartialHomeProduct", products);
         }
 
-        public ActionResult ListProduct(int? id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
+        public ActionResult ListProduct(int? id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, string type)
         {
             if (query == null) ViewBag.query = "all";
             else ViewBag.query = query;
@@ -66,28 +66,49 @@ namespace GearBatOn.Controllers
             if (page == null) ViewBag.page = 1;
             else ViewBag.page = page;
 
+            ViewBag.type = type;
+
             return View();
         }
 
-        public ActionResult PartialListProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page)
+        public ActionResult PartialListCategory()
+        {
+            List<Category> categories = _dbContext.Categories.Where(x => x.Status == true).ToList();
+            return PartialView("PartialListCategory", categories);
+        }
+
+        public ActionResult PartialListBrand()
+        {
+            List<Brand> brands = _dbContext.Brands.Where(x => x.Status == true).ToList();
+            return PartialView("PartialListBrand", brands);
+        }
+
+        public ActionResult PartialListProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, string type)
         {
             if (page == null) page = 1;
             int take = 20;
-            var result = GetProduct(id, query, sortBy, fromPrice, toPrice, page, take);
+            var result = GetProduct(id, query, sortBy, fromPrice, toPrice, page, take, type);
             
             ViewBag.Paging = pg.Pagination(result.Item1, (int)page, take);
 
             return PartialView("PartialListProduct", result.Item2);
         }
 
-        public (int, List<Product>) GetProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, int take)
+        public (int, List<Product>) GetProduct(int id, string query, string sortBy, decimal? fromPrice, decimal? toPrice, int? page, int take, string type)
         {
             List<Product> tempProducts;
 
             if (id != 0)
-                tempProducts = _dbContext.Products.Where(x => x.CategoryId == id && x.Status == true).ToList();
+            {
+                if (type == "brand")
+                    tempProducts = _dbContext.Products.Where(x => x.BrandId == id && x.Status == true).ToList();
+                else
+                    tempProducts = _dbContext.Products.Where(x => x.CategoryId == id && x.Status == true).ToList();
+            }
             else
+            {
                 tempProducts = _dbContext.Products.Where(x => x.Status == true).ToList();
+            }
 
             if (fromPrice != 0 && toPrice != 0)
                 tempProducts = tempProducts.Where(x => x.Price >= fromPrice && x.Price <= toPrice).ToList();

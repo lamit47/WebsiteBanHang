@@ -11,7 +11,13 @@
             </a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser" style="">
                 <li>@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "dropdown-item" })</li>
-                <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "dropdown-item" })</li>
+                <li>
+                    @if (User.IsInRole("Administrator") || User.IsInRole("Manager") || User.IsInRole("Employee"))
+                    {
+                        @Html.ActionLink("Quản lý website", "Index", "Dash", routeValues: null, htmlAttributes: new { title = "Quản lý", @class = "dropdown-item" })
+                    }
+                </li>
+                <li>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "Manage", routeValues: null, htmlAttributes: new { title = "Đổi mật khẩu", @class = "dropdown-item" })</li>
                 <li>
                     <hr class="dropdown-divider">
                 </li>
@@ -22,8 +28,8 @@
 }
 else
 {
-    <div class="text-end">
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-outline-light me-2", type = "button" })
-        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-warning", type = "button" })
-    </div>
+<div class="text-end">
+    @Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-outline-light me-2", type = "button" })
+    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-warning", type = "button" })
+</div>
 }

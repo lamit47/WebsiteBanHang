@@ -6,6 +6,9 @@
 }
 <div style="height: 1rem;"></div>
 <div class="container">
+    <nav class="navbar navbar-light bg-light">
+        <span id="pathway">Bạn đang ở: <a href="/">Trang chủ</a> / <a href="/Home/ListProduct/@Model.Category.Id">@Model.Category.Name</a></span>
+    </nav>
     <div class="row gy-5">
         <div class="col-5">
             <div id="gearbaton-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -49,7 +52,7 @@
 
         <div class="col-6" style="margin-left: 100px;">
             <div id="name-product"><h3>@Html.DisplayFor(model => model.Name)</h3></div>
-            <br/>
+            <br />
             <span><h5>Thông tin chung</h5></span>
             <dl class="row">
                 <dt class="col-sm-3">Hãng sản xuất:</dt>
@@ -76,85 +79,85 @@
         </div>
     </div>
 
-@*<div>
-        <h4>Product</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+    @*<div>
+            <h4>Product</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CategoryId)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CategoryId)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CategoryId)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CountryId)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CountryId)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CountryId)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.CountryId)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.BrandId)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.BrandId)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.BrandId)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.BrandId)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.WarrantyPeriod)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.WarrantyPeriod)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.WarrantyPeriod)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.WarrantyPeriod)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.InventoryAmount)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.InventoryAmount)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.InventoryAmount)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.InventoryAmount)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Status)
-            </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Status)
-            </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>*@
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@

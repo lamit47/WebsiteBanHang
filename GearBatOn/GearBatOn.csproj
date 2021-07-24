@@ -342,6 +342,9 @@
     <Content Include="Views\Home\ListProduct.cshtml" />
     <Content Include="Views\Home\PartialListProduct.cshtml" />
     <Content Include="Views\ListAccount\Role.cshtml" />
+    <Content Include="Views\Home\PartialListCategory.cshtml" />
+    <Content Include="Views\Home\PartialListBrand.cshtml" />
+    <Content Include="Views\Shared\_StaffLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

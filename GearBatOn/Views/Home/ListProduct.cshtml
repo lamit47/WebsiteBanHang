@@ -36,6 +36,7 @@
         var fromPrice = @Html.Raw(ViewBag.fromPrice);
         var toPrice = @Html.Raw(ViewBag.toPrice);
         var query = "@Html.Raw(ViewBag.query)";
+        var type = "@Html.Raw(ViewBag.type)";
         Paging(@Html.Raw(ViewBag.Page));
         $('#product-sort').on('change', function () {
             if ($("#product-sort").val() != "") {
@@ -68,6 +69,7 @@
                 type: "GET",
                 data: {
                     id: @Html.Raw(ViewBag.categoryId),
+                    type: type,
                     query: query,
                     sortBy: $('#product-sort').val(),
                     fromPrice: fromPrice,

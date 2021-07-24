@@ -65,3 +65,15 @@ main {
     text-decoration: none;
     color: palevioletred;
 }
+
+#pathway a {
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-menu {
+    max-height: 600px;
+    overflow-y: scroll;
+    min-width: 200px;
+    overflow: hidden;
+}

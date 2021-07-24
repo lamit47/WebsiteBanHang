@@ -18,7 +18,8 @@
 
                 <ul></ul>
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
+                    <li id="category"></li>
+                    <li id="brand"></li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
                 </ul>
@@ -38,10 +39,32 @@
     </main>
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container text-center">
-            <span class="text-muted"><small>Copyright &copy; @DateTime.Now.Year - My ASP.NET Application</small></span>
+            <span class="text-muted"><small>Copyright &copy; @DateTime.Now.Year - GearBatOn</small></span>
         </div>
     </footer>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $.ajax({
+            url: "/Home/PartialListCategory",
+            type: "GET",
+            success: function (data) {
+                $("#category").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+        $.ajax({
+            url: "/Home/PartialListBrand",
+            type: "GET",
+            success: function (data) {
+                $("#brand").empty().append(data);
+            },
+            error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }
+        });
+    </script>
 </body>
 </html>

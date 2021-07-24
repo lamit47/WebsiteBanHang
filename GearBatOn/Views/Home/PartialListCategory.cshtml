@@ -1,0 +1,15 @@
+﻿@model IEnumerable<GearBatOn.Models.Category>
+
+
+<div class="dropdown">
+    <a class="dropdown-toggle nav-link px-2 text-dark" href="#" id="dropdownCategory" data-bs-toggle="dropdown" aria-expanded="false">
+        Danh mục
+    </a>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+        @foreach (var item in Model)
+        {
+            <li><a class="dropdown-item" href="/Home/ListProduct/@item.Id">@Html.DisplayFor(modelItem => item.Name)</a></li>
+        }
+    </ul>
+</div>

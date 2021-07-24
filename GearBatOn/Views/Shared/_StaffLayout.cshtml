@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    <header class="p-3 text-dark fixed-top" style="background-color: #e3f2fd;">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="@Url.Content("~/Images/logo.png")" width="40" height="32" />
+                </a>
+
+                <ul></ul>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>@Html.ActionLink("Hãng", "Index", "Brand", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
+                    <li>@Html.ActionLink("Danh mục", "Index", "Category", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
+                    <li>@Html.ActionLink("Duyệt đơn hàng", "Index", "Invoice", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
+                    <li>@Html.ActionLink("Sản phẩm", "Index", "Product", new { area = "" }, new { @class = "nav-link px-2 text-dark" })</li>
+                    <li>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                        {
+                            @Html.ActionLink("Khuyến mãi", "Index", "Promotion", new { area = "" }, new { @class = "nav-link px-2 text-dark" })
+                        }
+                    </li>
+                    <li>
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+                        {
+                            @Html.ActionLink("Thống kê", "Index", "Brand", new { area = "" }, new { @class = "nav-link px-2 text-dark" })
+                        }
+                    </li>
+                    <li>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            @Html.ActionLink("Danh sách tài khoản", "Index", "ListAccount", new { area = "" }, new { @class = "nav-link px-2 text-dark" })
+                        }
+                    </li>
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </header>
+    <main class="flex-shrink-0">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted"><small>Copyright &copy; @DateTime.Now.Year - GearBatOn</small></span>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
