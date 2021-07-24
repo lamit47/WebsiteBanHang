@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int i = 1;
     decimal t = 0;
+    decimal ratio = (decimal)ViewBag.ratio;
 }
 
 <h2>Chi tiết đơn đặt hàng</h2>
@@ -45,8 +46,16 @@
             </tr>
         }
         <tr>
-            <td colspan="4" class="table-active">Tổng tiền</td>
+            <td colspan="4" class="table-active">Tạm tính</td>
             <td>@string.Format("{0:n}", @t)₫</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="table-active">Khuyến mãi</td>
+            <td>@string.Format("{0:n}", (@t*@ratio/100))₫</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="table-active">Thành tiền</td>
+            <td>@string.Format("{0:n}", @t- (@t * @ratio / 100))₫</td>
         </tr>
     </tbody>
 </table>

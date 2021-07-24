@@ -38,7 +38,9 @@ namespace GearBatOn.Controllers
       
         public ActionResult Details(int? id)
         {
+            Invoice temp = _dbContext.Invoices.First(x => x.Id == id);
             List<InvoiceDetail> invoiceDetails = _dbContext.InvoiceDetails.Where(c => c.InvoiceId == id).ToList();
+            ViewBag.ratio = (temp.PromotionId == null) ? 0 : temp.Promotion.Ratio;
             return View(invoiceDetails);
         }
        
