@@ -238,7 +238,7 @@ namespace GearBatOn.Controllers
             invoice.Date = DateTime.Now;
             invoice.PaymentStatus = false;
 
-            Promotion promotion = _dbContext.Promotions.First(x => x.Id == invoice.Id && x.Status == true);
+            Promotion promotion = _dbContext.Promotions.First(x => x.Id == invoice.PromotionId && x.Status == true);
             if (promotion == null)
             {
                 invoice.PromotionId = null;
@@ -259,7 +259,7 @@ namespace GearBatOn.Controllers
             _dbContext.SaveChanges();
 
             Session.Clear();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyOrder");
         }
 
         [HttpPost]
