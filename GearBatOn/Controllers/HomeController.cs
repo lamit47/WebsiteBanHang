@@ -361,5 +361,10 @@ namespace GearBatOn.Controllers
             ViewBag.ratio = (temp.PromotionId == null) ? 0 : temp.Promotion.Ratio;
             return View(invoiceDetails);
         }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }
