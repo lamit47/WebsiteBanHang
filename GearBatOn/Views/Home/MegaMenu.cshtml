@@ -1,45 +1,82 @@
 ﻿<div class="row" id="megamenu">
     <div class="list-group" style="width: 300px;">
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('laptop')">Laptop</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('pc')">PC</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('apple')">Apple</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('partPC')">Linh kiện PC</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('monitor')">Màn hình</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('keyboard')">Bàn phím</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('mouseAndPad')">Chuột và lót chuột</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('headphone')">Tai nghe</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('gamingChar')">Ghế gaming</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('console')">Console</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('speaker')">Loa và tai nghe</a>
-        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('device')">Thiết bị</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('laptop'); addClassByClick(this);">Laptop</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('pc'); addClassByClick(this);">PC</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('apple'); addClassByClick(this);">Apple</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('partPC'); addClassByClick(this);">Linh kiện PC</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('monitor'); addClassByClick(this);">Màn hình</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('keyboard'); addClassByClick(this);">Bàn phím</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('mouseAndPad'); addClassByClick(this);">Chuột và lót chuột</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('headphone'); addClassByClick(this);">Tai nghe</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('gamingChar'); addClassByClick(this);">Ghế gaming</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('console'); addClassByClick(this);">Console</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('speaker'); addClassByClick(this);">Loa và tai nghe</a>
+        <a href="#" class="list-group-item list-group-item-action" onclick="showCategory('device'); addClassByClick(this);">Thiết bị</a>
+    </div>
+    <div id="image-pro" class="list-group-item list-group-item-action gearbaton-category" style="width: 1000px;">
+        <div id="gearbaton-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/10987654321web-banner.jpg" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/h300-banner.jpg" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/76543211600x900-(1).jpg" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/aspire-5---1600x900.jpg" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/1banner-helios500.jpg" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.acervietnam.com.vn/Data/Sites/1/Banner/76543211600x900.jpg" class="d-block w-100" />
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#gearbaton-carousel"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#gearbaton-carousel"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
     <div id="laptop" class="list-group-item list-group-item-action gearbaton-category" style="width: 1000px; display: none;">
         <div class="row">
             <div class="col">
                 <div><h4><span class="text-danger"><b>Laptop theo thương hiệu</b></span></h4></div>
-                <div><a href="#">Acer</a></div>
-                <div><a href="#">Asus</a></div>
-                <div><a href="#">Dell</a></div>
-                <div><a href="#">Lenovo</a></div>
-                <div><a href="#">HP</a></div>
-                <div><a href="#">MSI</a></div>
-                <div><a href="#">Gigabyte</a></div>
+                <div><a href="/Home/ListProduct/3?type=brand">Acer</a></div>
+                <div><a href="/Home/ListProduct/4?type=brand">Asus</a></div>
+                <div><a href="/Home/ListProduct/5?type=brand">Dell</a></div>
+                <div><a href="/Home/ListProduct/6?type=brand">Lenovo</a></div>
+                <div><a href="/Home/ListProduct/7?type=brand">HP</a></div>
+                <div><a href="/Home/ListProduct/8?type=brand">MSI</a></div>
+                <div><a href="/Home/ListProduct/9?type=brand">Gigabyte</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Laptop theo giá</b></span></h4></div>
-                <div><a href="#">Dưới 15 triệu</a></div>
-                <div><a href="#">Từ 15-20 triệu</a></div>
-                <div><a href="#">Từ 20-25 triệu</a></div>
-                <div><a href="#">Từ 25-30 triệu</a></div>
-                <div><a href="#">Trên 30 triệu</a></div>
+                <div><a href="/Home/ListProduct/1?toPrice=15000000">Dưới 15 triệu</a></div>
+                <div><a href="/Home/ListProduct/1?fromPrice=15000000&toPrice=20000000">Từ 15-20 triệu</a></div>
+                <div><a href="/Home/ListProduct/1?fromPrice=20000000&toPrice=25000000">Từ 20-25 triệu</a></div>
+                <div><a href="/Home/ListProduct/1?fromPrice=25000000&toPrice=30000000">Từ 25-30 triệu</a></div>
+                <div><a href="/Home/ListProduct/1?fromPrice=30000000">Trên 30 triệu</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Linh kiện và phụ kiện laptop</b></span></h4></div>
-                <div><a href="#">Ram Laptop</a></div>
-                <div><a href="#">SSD Laptop</a></div>
-                <div><a href="#">Đế tản nhiệt laptop</a></div>
-                <div><a href="#">Balo và túi chống sốc</a></div>
-                <div><a href="#">Ổ cứng di động</a></div>
+                <div><a href="/Home/ListProduct/5">Ram Laptop</a></div>
+                <div><a href="/Home/ListProduct/6">Đế tản nhiệt laptop</a></div>
+                <div><a href="/Home/ListProduct/7">Túi chống sốc</a></div>
+                <div><a href="/Home/ListProduct/8">Balo</a></div>
+                <div><a href="/Home/ListProduct/9">Ổ cứng di động</a></div>
+                <div><a href="/Home/ListProduct/33">SSD 2.5' SATA 3</a></div>
+                <div><a href="/Home/ListProduct/34">SSD M2 SATA 3</a></div>
+                <div><a href="/Home/ListProduct/35">SSD M2 NVME</a></div>
             </div>
         </div>
     </div>
@@ -56,11 +93,11 @@
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Cấu hình theo giá</b></span></h4></div>
-                <div><a href="#">Dưới 15 triệu</a></div>
-                <div><a href="#">Từ 15-20 triệu</a></div>
-                <div><a href="#">Từ 20-25 triệu</a></div>
-                <div><a href="#">Từ 25-30 triệu</a></div>
-                <div><a href="#">Trên 30 triệu</a></div>
+                <div><a href="/Home/ListProduct/2?toPrice=15000000">Dưới 15 triệu</a></div>
+                <div><a href="/Home/ListProduct/2?fromPrice=15000000&toPrice=20000000">Từ 15-20 triệu</a></div>
+                <div><a href="/Home/ListProduct/2?fromPrice=20000000&toPrice=25000000">Từ 20-25 triệu</a></div>
+                <div><a href="/Home/ListProduct/2?fromPrice=25000000&toPrice=30000000">Từ 25-30 triệu</a></div>
+                <div><a href="/Home/ListProduct/2?fromPrice=30000000">Trên 30 triệu</a></div>
             </div>
         </div>
     </div>
@@ -68,21 +105,21 @@
         <div class="row">
             <div class="col">
                 <div><h4><span class="text-danger"><b>Macbook</b></span></h4></div>
-                <div><a href="#">Macbook Air</a></div>
-                <div><a href="#">Macbook Pro</a></div>
+                <div><a href="/Home/ListProduct/10">Macbook Air</a></div>
+                <div><a href="/Home/ListProduct/11">Macbook Pro</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>iMac</b></span></h4></div>
-                <div><a href="#">iMac M1</a></div>
+                <div><a href="/Home/ListProduct/13">iMac M1</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Mac</b></span></h4></div>
-                <div><a href="#">Mac mini</a></div>
+                <div><a href="/Home/ListProduct/12 ">Mac mini</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Phụ kiện Apple</b></span></h4></div>
-                <div><a href="#">Âm thanh</a></div>
-                <div><a href="#">Bàn phím và chuột</a></div>
+                <div><a href="/Home/ListProduct/14">Âm thanh</a></div>
+                <div><a href="/Home/ListProduct/15">Bàn phím và chuột</a></div>
             </div>
         </div>
     </div>
@@ -90,65 +127,65 @@
         <div class="row">
             <div class="col">
                 <div><h4><span class="text-danger"><b>Mainboard - Bo mạch chủ</b></span></h4></div>
-                <div><a href="#">Intel H510</a></div>
-                <div><a href="#">Intel H410</a></div>
-                <div><a href="#">Intel B560</a></div>
-                <div><a href="#">Intel B460</a></div>
-                <div><a href="#">Intel Z590</a></div>
-                <div><a href="#">Intel Z490</a></div>
-                <div><a href="#">AMD X570</a></div>
-                <div><a href="#">AMD B550</a></div>
+                <div><a href="/Home/ListProduct/16">Intel H510</a></div>
+                <div><a href="/Home/ListProduct/17">Intel H410</a></div>
+                <div><a href="/Home/ListProduct/18">Intel B560</a></div>
+                <div><a href="/Home/ListProduct/19">Intel B460</a></div>
+                <div><a href="/Home/ListProduct/20">Intel Z590</a></div>
+                <div><a href="/Home/ListProduct/21">Intel Z490</a></div>
+                <div><a href="/Home/ListProduct/22">AMD X570</a></div>
+                <div><a href="/Home/ListProduct/23">AMD B550</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>CPU - Bộ vi xử lý</b></span></h4></div>
-                <div><a href="#">Intel 9th Gen</a></div>
-                <div><a href="#">Intel 10th Gen</a></div>
-                <div><a href="#">Intel 11th Gen</a></div>
-                <div><a href="#">AMD AM4 Gen3</a></div>
-                <div><a href="#">AMD AM4 Gen5</a></div>
+                <div><a href="/Home/ListProduct/24">Intel 9th Gen</a></div>
+                <div><a href="/Home/ListProduct/25">Intel 10th Gen</a></div>
+                <div><a href="/Home/ListProduct/26">Intel 11th Gen</a></div>
+                <div><a href="/Home/ListProduct/27">AMD AM4 Gen3</a></div>
+                <div><a href="/Home/ListProduct/28">AMD AM4 Gen5</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Ram</b></span></h4></div>
-                <div><a href="#">RAM Laptop DDR4</a></div>
-                <div><a href="#">RAM PC DDR4</a></div>
+                <div><a href="/Home/ListProduct/5">RAM Laptop DDR4</a></div>
+                <div><a href="/Home/ListProduct/29">RAM PC DDR4</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>VGA - Card đồ họa</b></span></h4></div>
-                <div><a href="#">NVIDIA RTX</a></div>
-                <div><a href="#">AMD Radeon</a></div>
-                <div><a href="#">NVIDIA Quadro</a></div>
+                <div><a href="/Home/ListProduct/30">NVIDIA RTX</a></div>
+                <div><a href="/Home/ListProduct/31">AMD Radeon</a></div>
+                <div><a href="/Home/ListProduct/32">NVIDIA Quadro</a></div>
             </div>
         </div>
         <div class="row">
             <div class="col">
                 <div><h4><span class="text-danger"><b>SSD - Ổ cứng thể rắn</b></span></h4></div>
-                <div><a href="#">2.5' SATA 3</a></div>
-                <div><a href="#">M2 SATA 3</a></div>
-                <div><a href="#">M2 NVME</a></div>
+                <div><a href="/Home/ListProduct/33">2.5' SATA 3</a></div>
+                <div><a href="/Home/ListProduct/34">M2 SATA 3</a></div>
+                <div><a href="/Home/ListProduct/35">M2 NVME</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>HDD - Ổ cứng cơ học</b></span></h4></div>
-                <div><a href="#">HDD 1TB</a></div>
-                <div><a href="#">HDD 2TB</a></div>
-                <div><a href="#">HDD 3TB</a></div>
-                <div><a href="#">HDD 8TB</a></div>
+                <div><a href="/Home/ListProduct/36">HDD 1TB</a></div>
+                <div><a href="/Home/ListProduct/37">HDD 2TB</a></div>
+                <div><a href="/Home/ListProduct/38">HDD 3TB</a></div>
+                <div><a href="/Home/ListProduct/39">HDD 8TB</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Case - Vỏ máy tính</b></span></h4></div>
-                <div><a href="#">Case NZXT</a></div>
-                <div><a href="#">Case Corsair</a></div>
-                <div><a href="#">Case Cooler Master</a></div>
+                <div><a href="/Home/ListProduct/40">Case NZXT</a></div>
+                <div><a href="/Home/ListProduct/41">Case Corsair</a></div>
+                <div><a href="/Home/ListProduct/42">Case Cooler Master</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>PSU - Nguồn máy tính</b></span></h4></div>
-                <div><a href="#">PSU Corsair</a></div>
-                <div><a href="#">PSU NZXT</a></div>
-                <div><a href="#">PSU Corsair</a></div>
+                <div><a href="/Home/ListProduct/43">PSU Corsair</a></div>
+                <div><a href="/Home/ListProduct/45">PSU NZXT</a></div>
+                <div><a href="/Home/ListProduct/46">PSU Corsair</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Tản nhiệt</b></span></h4></div>
-                <div><a href="#">Tản nhiệt nước</a></div>
-                <div><a href="#">Tản nhiệt khí</a></div>
+                <div><a href="/Home/ListProduct/47">Tản nhiệt nước</a></div>
+                <div><a href="/Home/ListProduct/48">Tản nhiệt khí</a></div>
             </div>
         </div>
     </div>
@@ -156,10 +193,10 @@
         <div class="row">
             <div class="col">
                 <div><h4><span class="text-danger"><b>Theo giá</b></span></h4></div>
-                <div><a href="#">Dưới 5 triệu</a></div>
-                <div><a href="#">Từ 5-10 triệu</a></div>
-                <div><a href="#">Từ 10-15 triệu</a></div>
-                <div><a href="#">Trên 15 triệu</a></div>
+                <div><a href="/Home/ListProduct/48?toPrice=50000000">Dưới 5 triệu</a></div>
+                <div><a href="/Home/ListProduct/48?fromPrice=5000000&toPrice=10000000">Từ 5-10 triệu</a></div>
+                <div><a href="/Home/ListProduct/48?fromPrice=10000000&toPrice=15000000">Từ 10-15 triệu</a></div>
+                <div><a href="/Home/ListProduct/48?fromPrice=15000000">Trên 15 triệu</a></div>
             </div>
             <div class="col">
                 <div><h4><span class="text-danger"><b>Hãng</b></span></h4></div>

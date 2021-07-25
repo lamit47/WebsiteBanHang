@@ -6,8 +6,8 @@
 }
 <div style="height: 1rem;"></div>
 <div class="container">
-    <nav class="navbar navbar-light bg-light">
-        <span id="pathway">Bạn đang ở: <a href="/">Trang chủ</a> / <a href="/Home/ListProduct/@Model.Category.Id">@Model.Category.Name</a></span>
+    <nav class="navbar navbar-light">
+        <span id="pathway">&nbsp;Bạn đang ở: <a href="/">Trang chủ</a> / <a href="/Home/ListProduct/@Model.Category.Id">@Model.Category.Name</a></span>
     </nav>
     <div class="row gy-5">
         <div class="col-5">
@@ -37,12 +37,12 @@
                         }
                     }
                 </div>
-                <button class="carousel-control-prev btn-dark" type="button" data-bs-target="#gearbaton-carousel"
+                <button class="carousel-control-prev" type="button" data-bs-target="#gearbaton-carousel"
                         data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next btn-dark" type="button" data-bs-target="#gearbaton-carousel"
+                <button class="carousel-control-next" type="button" data-bs-target="#gearbaton-carousel"
                         data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
@@ -69,7 +69,14 @@
                 <span><b>Giá sản phẩm:</b> <h4 class="text-danger">@Html.DisplayFor(model => model.Price)₫</h4></span>
             </div>
 
-            <a href="#" type="button" class="btn btn-outline-success" onclick="OrderProduct(@Model.Id);">Thêm vào giỏ hàng</a>
+            @if (ViewBag.outOfStock)
+            {
+                <a href="#" type="button" class="btn btn-outline-success disabled">Hết hàng</a>
+            }
+            else
+            {
+                <a href="#" type="button" class="btn btn-outline-success" onclick="OrderProduct(@Model.Id);">Thêm vào giỏ hàng</a>
+            }
         </div>
         <div id="tab-content" class="col-12">
             <div id="name-product"><h3>Mô tả sản phẩm</h3></div>

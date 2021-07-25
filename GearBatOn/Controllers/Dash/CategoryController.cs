@@ -43,7 +43,7 @@ namespace GearBatOn.Controllers
             category.Status = true;
             _dbContext.Categories.AddOrUpdate(category);
             _dbContext.SaveChanges();
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("Index");
         }
 
         
@@ -52,7 +52,7 @@ namespace GearBatOn.Controllers
             Category category = _dbContext.Categories.FirstOrDefault(x => x.Id == Id);
             category.Status = false;
             _dbContext.SaveChanges();
-            return RedirectToAction("CategoryList");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Create()
@@ -69,7 +69,7 @@ namespace GearBatOn.Controllers
                 category.Status = true;
                 _dbContext.Categories.AddOrUpdate(category);
                 _dbContext.SaveChanges();
-                return RedirectToAction("CategoryList");
+                return RedirectToAction("Index");
             }
             return View();
         }

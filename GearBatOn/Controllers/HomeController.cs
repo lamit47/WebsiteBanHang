@@ -23,6 +23,12 @@ namespace GearBatOn.Controllers
             Product product = _dbContext.Products.FirstOrDefault(x => x.Id == id);
             product.ListImage = _dbContext.Images.Where(x => x.ProductId == product.Id).ToList();
 
+            ViewBag.outOfStock = false;
+            if (product.Inventory == 0)
+            {
+                ViewBag.outOfStock = true;
+            }
+
             return View(product);
         }
 
@@ -172,7 +178,11 @@ namespace GearBatOn.Controllers
 
             if (product != null)
             {
-                product.FeatureImage = _dbContext.Images.Where(x => x.ProductId == product.Id).First().ImagePath;
+                Image image = _dbContext.Images.Where(x => x.ProductId == product.Id).First();
+                if (image != null)
+                {
+                    product.FeatureImage = image.ImagePath;
+                }
                 Item item = listCart.Find(x => x.Product.Id == product.Id);
                 if (item == null)
                 {

@@ -71,7 +71,7 @@ main {
 
 #megamenu a:hover {
     text-decoration: none;
-    color: palevioletred;
+    color: blue;
 }
 
 #pathway a {
@@ -79,9 +79,12 @@ main {
     color: black;
 }
 
-.dropdown-menu {
+.cate-brand {
     max-height: 600px;
     overflow-y: scroll;
     min-width: 200px;
-    overflow: hidden;
+}
+
+.navbar-title {
+    border-radius: 5px;
 }

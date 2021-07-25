@@ -48,8 +48,18 @@ namespace GearBatOn.Controllers
         public JsonResult ChangeStatus(int id)
         {
             var invoice = _dbContext.Invoices.FirstOrDefault(x => x.Id == id);
-            invoice.PaymentStatus = !invoice.PaymentStatus;
-            _dbContext.SaveChanges();
+            if (!invoice.PaymentStatus)
+            {
+                List<InvoiceDetail> invoiceDetails = _dbContext.InvoiceDetails.Where(c => c.InvoiceId == id).ToList();
+                foreach (var item in invoiceDetails)
+                {
+                    Product product = _dbContext.Products.First(x => x.Id == item.ProductId);
+                    product.Inventory -= item.Quantity;
+                    _dbContext.SaveChanges();
+                }
+                invoice.PaymentStatus = true;
+                _dbContext.SaveChanges();
+            }
             return Json(new
             {
                 status = invoice.PaymentStatus

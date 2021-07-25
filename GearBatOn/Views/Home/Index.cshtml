@@ -5,41 +5,33 @@
 @Html.Partial("~/Views/Home/MegaMenu.cshtml")
 <div style="height: 1rem"></div>
 <div id="list-pc" class="row g-3 card-group align-items-center">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-danger navbar-title text-light">
         <h2>PC - Miễn phí giao hàng toàn quốc</h2>
-        <a href="/Home/ListProduct/2" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/2" class="float-right btn btn-outline-light">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
 <div style="height: 1rem"></div>
 <div id="list-laptop" class="row g-3 card-group align-items-center">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-danger navbar-title text-light">
         <h2>Laptop - Miễn phí giao hàng toàn quốc</h2>
-        <a href="/Home/ListProduct/1" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/1" class="float-right btn btn-outline-light">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
 <div style="height: 1rem"></div>
 <div id="list-monitor" class="row g-3 card-group align-items-center">
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-danger navbar-title text-light">
         <h2>Màn hình - Miễn phí giao hàng toàn quốc</h2>
-        <a href="/Home/ListProduct/4" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/4" class="float-right btn btn-outline-light">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
 <div style="height: 1rem"></div>
-<div id="list-keyboard" class="row g-3 card-group align-items-center">
-    <nav class="navbar navbar-light bg-light">
+<div id="list-cpu" class="row g-3 card-group align-items-center">
+    <nav class="navbar navbar-light bg-danger navbar-title text-light">
         <h2>Bàn phím - Miễn phí giao hàng toàn quốc</h2>
-        <a href="/Home/ListProduct/3" class="float-right">Xem tất cả</a>
-    </nav>
-    @*item*@
-</div>
-<div style="height: 1rem"></div>
-<div id="list-mouse" class="row g-3 card-group align-items-center">
-    <nav class="navbar navbar-light bg-light">
-        <h2>Chuột - Miễn phí giao hàng toàn quốc</h2>
-        <a href="/Home/ListProduct/3" class="float-right">Xem tất cả</a>
+        <a href="/Home/ListProduct/3" class="float-right btn btn-outline-light">Xem tất cả</a>
     </nav>
     @*item*@
 </div>
@@ -49,11 +41,14 @@
         getProductByCategory("list-pc", 2);
         getProductByCategory("list-laptop", 1);
         getProductByCategory("list-monitor", 4);
-        getProductByCategory("list-keyboard", 3);
-        getProductByCategory("list-mouse", 3);
+        getProductByCategory("list-cpu", 3);
+        function addClassByClick(button) {
+            $(button).addClass("active")
+        }
         function showCategory(id) {
             $(".gearbaton-category").hide();
             $(".gearbaton-category").removeClass("list-group-item");
+            $(".list-group-item-action").removeClass("active");
             $("#" + id).show();
             $("#" + id).addClass("list-group-item");
         }

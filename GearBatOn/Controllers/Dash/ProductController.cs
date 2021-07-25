@@ -22,7 +22,7 @@ namespace GearBatOn.Controllers
         public ActionResult PartialProduct(int? page)
         {
             if (page == null) page = 1;
-            int take = 10;
+            int take = 5;
             int total = _dbContext.Products.Where(x => x.Status == true).Count();
             List<Product> products = _dbContext.Products.Where(x => x.Status == true).OrderBy(x => x.Id).Skip(((int)page - 1) * take).Take(take).ToList();
             foreach (var item in products)
