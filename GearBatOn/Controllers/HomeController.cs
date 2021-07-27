@@ -217,6 +217,7 @@ namespace GearBatOn.Controllers
             return Json(new { status = true });
         }
 
+        [Authorize]
         public ActionResult CheckOut()
         {
             Invoice invoice = new Invoice();
@@ -333,11 +334,13 @@ namespace GearBatOn.Controllers
             return PartialView("Cart");
         }
 
+        [Authorize]
         public ActionResult MyOrder()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult PartialMyOrder(int? page)
         {
             if (page == null) page = 1;
@@ -354,6 +357,7 @@ namespace GearBatOn.Controllers
             return PartialView("PartialMyOrder", invoices);
         }
 
+        [Authorize]
         public ActionResult MyOderDetails(int? id)
         {
             Invoice temp = _dbContext.Invoices.First(x => x.Id == id);
