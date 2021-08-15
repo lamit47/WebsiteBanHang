@@ -1,3 +1,3 @@
 # GearBatOn
-Web bán linh kiện máy tính.
-Đề tài môm lập trình web.
+Web bán linh kiện máy tính.  
+Đề tài môn lập trình web.
